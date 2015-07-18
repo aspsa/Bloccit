@@ -8,6 +8,12 @@ require 'faker'
     )
 end
 
+Post.create!(
+    title: "Unique Post",
+    body: "The Checkpoint #32 ('Seed Data') assignment tasks one to add a unique
+    post to the existing database in order to test the Idempotence principle."
+)
+
 posts = Post.all
 
 # Create Commments
@@ -17,6 +23,12 @@ posts = Post.all
         body: Faker::Lorem.paragraph
     )
 end
+
+Comment.create!(
+    body: "The Checkpoint #32 ('Seed Data') assignment tasks one to add a unique
+    comment to the existing database in order to test the Idempotence
+    principle."
+)
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
