@@ -1,6 +1,30 @@
 source 'https://rubygems.org'
 
-# Add teh 'bootstrap-sass' gem on any line (outside of a group)
+# Pry is a powerful alternative to the standard IRB shell for Ruby. It is
+# written from scratch to provide a number of advanced features, including:
+#   - Source code browsing (including core C source with the pry-doc gem)
+#   - Documentation browsing
+#   - Live help system
+#   - Open methods in editors (edit Class#method)
+#   - Syntax highlighting
+#   - Command shell integration (start editors, run git, and rake from within
+#     Pry)
+#   - Gist integration
+#   - Navigation around state (cd, ls and friends)
+#   - Runtime invocation (use Pry as a developer console or debugger)
+#   - Exotic object support (BasicObject instances, IClasses, ...)
+#   - A powerful and flexible command system
+#   - Ability to view and replay history
+#   - Many convenience commands inspired by IPython, Smalltalk and other
+#     advanced REPLs
+#   - A wide-range number of plugins that provide remote sessions, full
+#     debugging functionality, and more
+#
+# [Source: 'README.md' located at
+#          https://github.com/pry/pry/blob/master/README.md]
+gem 'pry-rails'
+
+# Add the 'bootstrap-sass' gem on any line (outside of a group)
 gem 'bootstrap-sass'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
