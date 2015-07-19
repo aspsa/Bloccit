@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'advertisements/index'
+
+  get 'advertisements/show'
+
+  get 'advertisement/index'
+
+  get 'advertisement/show'
+
   # Checkpoint #33 - CRUD
   #
   # "We'll remove those in favor of a more succinct way of creating 'Post'
@@ -11,6 +19,11 @@ Rails.application.routes.draw do
   # get 'posts/edit'
 
   resources :posts
+
+  # Checkpoint #33 ("CRUD") assignment
+  #
+  # update 'routes.rb' to use resourceful routing for Advertisement.
+  resources :advertisements
 
   # "Notice that we also removed the get 'welcome/index', because we've
   # declared the 'index' view as 'root'. We also cleaned up the 'about'
