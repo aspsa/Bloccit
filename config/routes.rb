@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-  get 'advertisements/index'
-
-  get 'advertisements/show'
-
-  get 'advertisement/index'
-
-  get 'advertisement/show'
+  #get 'advertisements/index'
+  #get 'advertisements/show'
+  #get 'advertisement/index'
+  #get 'advertisement/show'
 
   # Checkpoint #33 - CRUD
   #
