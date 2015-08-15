@@ -93,3 +93,5 @@ group :development, :test do
   gem 'spring'
 end
 
+# Checkpoint #36 - User Authentication
+gem 'devise'

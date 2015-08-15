@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   # Checkpoint #33 - CRUD
   #
   # "We'll remove those in favor of a more succinct way of creating 'Post'
