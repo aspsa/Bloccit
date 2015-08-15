@@ -1,2 +1,11 @@
-<h1>Question#index</h1>
-<p>Find me in app/views/question/index.html.erb</p>
+<!-- Checkpoint #35 - More CRUD -->
+<h1>All Questions</h1>
+<% @questions.each do |question| %>
+    <div class="media">
+        <div class="media-body">
+            <h4 class="media-heading">
+                <%= link_to question.title, question %>
+            </h4>
+        </div>
+    </div>
+<% end %>
