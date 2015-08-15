@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  # Checkpoint #35 assignment - More CRUD
+  # Update 'routes.rb' to use resourceful routing for 'Quesion'.
+  # get 'question/index'
+  # get 'question/show'
+  # get 'question/new'
+  # get 'question/edit'
+  
+  resources :questions
+
   # Checkpoint #33 - CRUD
   #
   # "We'll remove those in favor of a more succinct way of creating 'Post'
