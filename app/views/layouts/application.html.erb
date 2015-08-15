@@ -31,6 +31,28 @@
       <li><%= link_to "Bloccit", root_path %></li>
       <li><%= link_to "About", about_path %></li>
     </ul>
+    
+    <!--
+      Since every view may have a 'flash' message at some point,
+      we'll want to add it someplace universal -- if you're guessing
+      that's the 'appliction.html.erb' file, you'd be correct.
+    -->
+    <% if flash[:notice] %>
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash[:error] %>
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:error] %>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
   
     <%= yield %>
 </div>
