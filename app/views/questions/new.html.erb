@@ -8,7 +8,7 @@
             <li>Keep the quesiton focused. If you have several questions about a topic, create them separately.</li>
         </ul>
     </div>
-    <div class="col-mod-8">
+    <div class="col-md-8">
         <%= form_for @question do |f| %>
             <div class="form-group">
                 <%= f.label :title %>
@@ -19,7 +19,8 @@
                 <%= f.text_area :body, class: 'form-control', placeholder: "The Actual Question" %>
             </div>
             <div class="form-group">
-                <%= f.check_box "Resolved" %>
+                <%= f.label "Resolved?" %>
+                <%= f.check_box "resolved" %>
             </div>
             <div class="form-group">
                 <%= f.submit "Save", class: 'btn btn-success' %>
