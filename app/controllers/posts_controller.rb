@@ -1,4 +1,11 @@
 class PostsController < ApplicationController
+  # Assignment #37 - Authentication Continued
+  skip_before :no_flash_on_index, if: :devise_controller?
+  
+  def no_flash_on_index
+    # Need help here...
+  end
+  
   def index
     # Checkpoint #33 - CRUD
     #
