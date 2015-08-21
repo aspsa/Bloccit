@@ -24,6 +24,11 @@
             <h4 class="media-heading">
                 <%= link_to post.title, post %>
             </h4>
+            <!-- Checktpoint #38 - Associations -->
+            <small>
+                submitted <%= time_ago_in_words(post.created_at) %> by <%= post.user.name %><br />
+                <%= post.comments.count %> Comments
+            </small>
         </div>
     </div>
 <% end %>

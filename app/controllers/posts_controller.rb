@@ -24,6 +24,11 @@ class PostsController < ApplicationController
     # views."
     @post = Post.find(params[:id])
   end
+  
+  def create
+    @post = Post.new(params.require(:post).permit(:title, :body))
+    @post.user = current_user
+  end
 
   def new
   end
