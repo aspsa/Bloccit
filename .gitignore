@@ -17,4 +17,8 @@
 /tmp
 
 # Ignore application configuration
+<<<<<<< HEAD
 /config/application.example.yml
+=======
+/config/application.yml
+>>>>>>> checkpoint-37-authentication-continued
