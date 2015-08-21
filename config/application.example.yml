@@ -1,0 +1,14 @@
+# Checkpoint #37 - Authentication Continued
+#
+# Create a new file in your 'config' directory named
+# 'application.example.yml'. This file -- which will not be ignored
+# and so will show up on GitHub -- exists simply to demonstrate
+# to collaborators what variables are expected, and how they should
+# be formatted.
+#
+# The following says that we're storing our Sendgrid password and
+# username as ENV variables, but doesn't actually share the values
+# of these keys. Tihs is important -- do not provide values in the
+# example file, as it will be dislayed on GitHub.
+SENGRID_PASSWORD:
+SENDGRID_USERNAME:

@@ -95,3 +95,6 @@ end
 
 # Checkpoint #36 - User Authentication
 gem 'devise'
+
+# Checkpoint #37 - Authentication Continued
+gem 'figaro', '1.0'

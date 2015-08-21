@@ -16,5 +16,10 @@
 !/log/.keep
 /tmp
 
+<<<<<<< HEAD
 # Ignore SendGrid authentication file
 config/application.yml_bak
+=======
+# Ignore application configuration
+/config/application.example.yml
+>>>>>>> checkpoint-37-authentication-continued
