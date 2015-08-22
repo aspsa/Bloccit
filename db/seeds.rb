@@ -29,6 +29,9 @@ users = User.all
         # Checkpoint #38 - Associations
         user: users.sample,
         
+        # Checkpoint #40 - Topics and Posts
+        topic: topics.sample,
+        
         title: Faker::Lorem.sentence,
         body: Faker::Lorem.paragraph
     )
@@ -92,6 +95,18 @@ member = User.new(
 
 member.skip_confirmation!
 member.save!
+
+# Checkpoint #40 - Topics and Posts
+#
+# Create Topics
+15.times do
+    Topic.create!(
+        name:           Faker::Lorem.sentence,
+        description:    Faker::Lorem.paragraph
+    )
+end
+
+topics = Topic.all
 
 puts "Seed finished"
 puts "#{User.count} users created"

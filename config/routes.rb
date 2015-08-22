@@ -13,6 +13,28 @@ Rails.application.routes.draw do
   # get 'posts/edit'
 
   resources :posts
+  
+  # Checkpoint #40 - Topics and Posts
+  #
+  # The four statements below were automatically generating by the following
+  # command executed in the IRB:
+  #
+  #     'rails g controller topics index new show edit'
+  #
+  # get 'topics/index'
+  # get 'topics/new'
+  # get 'topics/show'
+  # get 'topics/edit'
+  #
+  # However, these are commented out in favor of the shortcut that follows.
+  # resources :topics
+  # By calling 'resources :posts' in the 'resources :topics' block, you are
+  # instructing Rails to create nested routes. Review your new routes by
+  # running 'rake routes | grep post'.
+  resources :topics do
+    resources :posts, except: [:index]
+  end
+  
 
   # Checkpoint #33 - CRUD
   #

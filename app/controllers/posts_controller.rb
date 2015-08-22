@@ -1,5 +1,26 @@
 class PostsController < ApplicationController
-  def index
+  # Checkpoint #40 - Topics and Posts
+  #
+  # From 'routes.rb':
+  #     However, these are commented out in favor of the shortcut that follows.
+  #     resources :topics
+  #     By calling 'resources :posts' in the 'resources :topics' block, you are
+  #     instructing Rails to create nested routes. Review your new routes by
+  #     running 'rake routes | grep post'.
+  #
+  #     resources :topics do
+  #       resources :posts, except: [:index]
+  #     end
+  #
+  # You may notice that there's no long a Post route for 'index'. This is
+  # because the 'posts/index.html.erb' is no longer needed. All posts will be
+  # displayed with respect to a Topic now, so 'posts#index' serves no purpose.
+  # Remove the 'index' action from the 'posts_controller.rb', and delete
+  # 'app/views/posts/index.html.erb'. You can remove it and stage the removal
+  # at once by typing 'git rm app/views/posts/index.html.erb'.
+  #
+=begin  
+  #def index
     # Checkpoint #33 - CRUD
     #
     # "To show dynamic data from the Bloccit database, you'll need to modify
@@ -10,6 +31,7 @@ class PostsController < ApplicationController
     # Checkpoint #39 - Authorization
     authorize @posts
   end
+=end
 
   def show
     # Checkpoint #33 - CRUD
@@ -28,13 +50,29 @@ class PostsController < ApplicationController
     # into a 'params' hash available in the controller and its associated
     # views."
     @post = Post.find(params[:id])
+    
+    # Checkpoint #40 - Topics and Posts
+    #
+    # In 'app/views/posts/show.html.erb' we have the statement
+    #
+    #     '<%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>'
+    #
+    # '@topic' is being used to generate a valid URL, but that variable does
+    # not exist yet in this view. We add the '@topic' variable here.
+    @topic = Topic.find(params[:topic_id])
   end
   
   def create
+    # Checkpoint #40 - Topics and Posts
+    @topic = Topic.find(params[:topic_id])
+    
     @post = Post.new(params.require(:post).permit(:title, :body))
     
     # Checkpoint #38 - Associations
     @post.user = current_user
+    
+    # Checkpoint #40 - Topics and Posts
+    @post.topic = @topic
     
     # Checkpoint #39 - Authorization
     # 
@@ -47,7 +85,11 @@ class PostsController < ApplicationController
     # raise # This will short-circuit the method
     if @post.save
       flash[:notice] = "Post was saved."
-      redirect_to @post
+      
+      # Checkpoint #40 - Topics and Posts
+      #
+      # redirect_to @post
+      redirect_to [@topic, @post]
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :new
@@ -55,6 +97,9 @@ class PostsController < ApplicationController
   end
 
   def new
+    # Checkpoint #40 - Topics and Posts
+    @topic = Topic.find(params[:topic_id])
+    
     @post = Post.new
     
     # Checkpoint #39 - Authorization
@@ -70,6 +115,9 @@ class PostsController < ApplicationController
   end
 
   def edit
+    # Checkpoint #40 - Topics and Posts
+    @topic = Topic.find(params[:topic_id])
+    
     # Checkpoint #35 - More CRUD
     @post = Post.find(params[:id])
     

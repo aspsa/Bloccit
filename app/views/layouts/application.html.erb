@@ -56,7 +56,14 @@
     -->
     <div class="pull-right user-info">
       <% if current_user %>
-        Hello <%= current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <!--
+          Checkpoint #40 - Topics and Posts
+          
+          Update the 'user-info div' to user the 'current_user' name.
+          
+          Hello &lt;%= current_user.email %&gt;! lt;%= link_to "Sign out", destroy_user_session_path, method: :delete %&gt;
+        -->
+        Hello <%= current_user.name %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to "Sign In", new_user_session_path %> or
         <%= link_to "Sign Up", new_user_registration_path %>

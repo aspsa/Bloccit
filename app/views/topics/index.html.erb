@@ -1,0 +1,38 @@
+<!--
+    Checkpoint #40 - Topics and Posts
+
+    The Topics controller file was created by executing the following statement
+    in the IRB:
+
+         'rails g controller topics index new show edit'
+
+Update the views that were created by the controller generator, starting with
+'topics/index.html.erb'. We still want to maintain proper authorization, so
+we'll wrap the "New Topic" link in an 'if policy()'.
+
+<h1>Topics#index</h1>
+<p>Find me in app/views/topics/index.html.erb</p>
+-->
+<h1>Topics</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <% @topics.each do |topic| %>
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <%= link_to topic.name, topic %>
+                    </h4>
+                    <small>
+                        <%= topic.description %>
+                    </small>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <div class="col-md-4">
+        <% if policy(Topic.new).create? %>
+            <%= link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
+        <% end %>
+    </div>
+</div>
