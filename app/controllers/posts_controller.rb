@@ -91,7 +91,7 @@ class PostsController < ApplicationController
     # Call authorize after the objects you've authorized have been defined.
     authorize @post
     
-    if @post.update_attributes(param.require(:post).permit(:title, :body))
+    if @post.update_attributes(params.require(:post).permit(:title, :body))
       flash[:notice] = "Post was updated."
       redirect_to @post
     else
