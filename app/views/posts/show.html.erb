@@ -10,7 +10,15 @@
 
 <!-- &lt;%= params %&gt; -->
 <!--
+    Checkpoint #33 - CRUD
     Replace previous code with post-specific code.
 -->
 <h1><%= @post.title %></h1>
+
+<!-- Checkpoint #35 - More CRUD, the 'link_to statement -->
+<!-- Checkpoint #39 - Authorization, the surrouding 'if' -->
+<% if policy(@post).edit? %>
+    <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-success' %>
+<% end %>
+
 <p><%= @post.body %></p>

@@ -6,6 +6,12 @@
     'index' method, you can use it in the 'index' view.
 -->
 <h1>All Posts</h1>
+
+<!-- Checkpoint #39 - Authorization -->
+<% if policy(Post.new).create? %>
+    <%= link_to "New Post", new_post_path, class: 'btn btn-success' %>
+<% end %>
+
 <% @posts.each do |post| %>
     <!--
         "If we call 'link_to' with the object to which we're linking as a second
@@ -17,6 +23,7 @@
     <!-- <p>&lt;%= link_to post.title, post %&gt;</p> ->
     
     <!--
+        Checkpoint #33 - CRUD
         We can use (Twitter) Bootstrap to help clean things up.
     -->
     <div class="media">
@@ -24,6 +31,7 @@
             <h4 class="media-heading">
                 <%= link_to post.title, post %>
             </h4>
+            
             <!-- Checktpoint #38 - Associations -->
             <small>
                 submitted <%= time_ago_in_words(post.created_at) %> by <%= post.user.name %><br />

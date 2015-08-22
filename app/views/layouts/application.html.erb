@@ -27,10 +27,27 @@
       <li>&lt;%= link_to "Bloccit", welcome_index_path %&gt;</li>
       <li>&lt;%= link_to "About", welcome_about_path %&gt;</li>
       -->
-      
       <li><%= link_to "Bloccit", root_path %></li>
       <li><%= link_to "About", about_path %></li>
     </ul>
+    
+    <!-- Checkpoint #35 - More CRUD -->
+    <% if flash[:notice] %>
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash[:error] %>
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:error] %>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
     
     <!--
       Checkpoint #37 - Authentication Continued

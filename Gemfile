@@ -98,3 +98,6 @@ gem 'devise'
 
 # Checkpoint #37 - Authentication Continued
 gem 'figaro', '1.0'
+
+# Checkpoint #39 - Authorization
+gem 'pundit'

@@ -6,9 +6,14 @@ class PostsController < ApplicationController
     # the 'index' method in 'post_controller.rb'. In the 'posts_controller.rb',
     # add the following to the 'index' method."
     @posts = Post.all
+    
+    # Checkpoint #39 - Authorization
+    authorize @posts
   end
 
   def show
+    # Checkpoint #33 - CRUD
+    #
     # "...before we update the view, let's go back to 'posts_controller.rb" and
     # update the 'show' method:"
     #
@@ -27,12 +32,68 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(params.require(:post).permit(:title, :body))
+    
+    # Checkpoint #38 - Associations
     @post.user = current_user
+    
+    # Checkpoint #39 - Authorization
+    # 
+    # We need to restrict 'posts#create', for when the 'posts#new' form is
+    # submitted. We use 'authorize()' to check restrictions on the '@post'
+    # about to be saved.
+    authorize @post
+    
+    # Checkpoint #35 - More CRUD
+    # raise # This will short-circuit the method
+    if @post.save
+      flash[:notice] = "Post was saved."
+      redirect_to @post
+    else
+      flash[:error] = "There was an error saving the post. Please try again."
+      render :new
+    end
   end
 
   def new
+    @post = Post.new
+    
+    # Checkpoint #39 - Authorization
+    #
+    # 'authorize()' will check the policy on new post resources. If it's
+    # satisfied (in this case, if a user is present), it will let the
+    # rendering continue. If not (if no user is present), it'll throw an
+    # exception.
+    #
+    # We have access to this 'authorize' method because we included 'Pundet'
+    # in 'ApplicationController', from which the 'PostController' inherits.
+    authorize @post
   end
 
   def edit
+    # Checkpoint #35 - More CRUD
+    @post = Post.find(params[:id])
+    
+    # Checkpoint #39 - Authorization
+    #
+    # Call authorize after the objects you've authorized have been defined.
+    authorize @post
+  end
+  
+  def update
+    # Checkpoint #35 - More CRUD
+    @post = Post.find(params[:id])
+    
+    # Checkpoint #39 - Authorization
+    #
+    # Call authorize after the objects you've authorized have been defined.
+    authorize @post
+    
+    if @post.update_attributes(param.require(:post).permit(:title, :body))
+      flash[:notice] = "Post was updated."
+      redirect_to @post
+    else
+      flash[:error] = "There was an error saving the post. Please try again."
+      render :edit
+    end
   end
 end

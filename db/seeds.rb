@@ -26,7 +26,9 @@ users = User.all
 # Create Posts
 50.times do
     Post.create!(
+        # Checkpoint #38 - Associations
         user: users.sample,
+        
         title: Faker::Lorem.sentence,
         body: Faker::Lorem.paragraph
     )
@@ -37,18 +39,59 @@ posts = Post.all
 # Create Commments
 100.times do
     Comment.create!(
+        # Checkpoint #38 - Associations
         # user: users.sample,   # We have not yet associated Users with Comments
+        
         post: posts.sample,
         body: Faker::Lorem.paragraph
     )
 end
 
-user = User.first
-user.skip_reconfirmation!
-user.update_attributes!(
-    email: '123aspsa123@gmail.com',
-    password: '!@TimISoarA11916'
+# Checkpoint #38 - Associations
+# Checkpoint #39 - Authorization, commented out
+#user = User.first
+#user.skip_reconfirmation!
+#user.update_attributes!(
+#    email: '123aspsa123@gmail.com',
+#    password: '!@TimISoarA11916'
+#)
+
+# Checkpoint #39 - Authorization
+#
+# Add a few special users to 'seeds.rb'. We can use these users to test
+# different authorization levels.
+#
+# Create an admin user
+admin = User.new(
+    name:       'Admin User',
+    email:      'admin@example.com',
+    password:   'helloworld',
+    role:       'admin'
 )
+
+admin.skip_confirmation!
+admin.save!
+
+# Create a moderator
+moderator = User.new(
+    name:       'Moderator User',
+    email:      'moderator@example.com',
+    password:   'helloworld',
+    role:       'moderator'
+)
+
+moderator.skip_confirmation!
+moderator.save!
+
+# Create a member
+member = User.new(
+    name:       'Member User',
+    email:      'member@example.com',
+    password:   'helloworld'
+)
+
+member.skip_confirmation!
+member.save!
 
 puts "Seed finished"
 puts "#{User.count} users created"
