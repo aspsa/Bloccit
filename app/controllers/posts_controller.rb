@@ -5,7 +5,10 @@ class PostsController < ApplicationController
     # "To show dynamic data from the Bloccit database, you'll need to modify
     # the 'index' method in 'post_controller.rb'. In the 'posts_controller.rb',
     # add the following to the 'index' method."
-    @posts = Post.all
+    
+    # Assignment #39 - Authoriation
+    #@posts = Post.all
+    @posts = policy_scope(Post)
     
     # Checkpoint #39 - Authorization
     authorize @posts
