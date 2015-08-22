@@ -12,7 +12,13 @@ Rails.application.routes.draw do
   # get 'posts/new'
   # get 'posts/edit'
 
-  resources :posts
+  # Mentor feedback:
+  #   Delete line 15 (posts are nested under topics now).
+  #
+  # Question: Why does not the checkpoint explicitly remove or comment out
+  # 'resources :posts'?
+  #
+  # resources :posts
   
   # Checkpoint #40 - Topics and Posts
   #

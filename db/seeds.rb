@@ -15,6 +15,24 @@ end
 
 users = User.all
 
+# Checkpoint #40 - Topics and Posts
+#
+# Create Topics
+#
+# Mentor feedback:
+#   Seeds are not OK. You use topics when creating posts, so you should define
+#   topics first.
+#
+# Note: Commented out below and moved here.
+15.times do
+    Topic.create!(
+        name:           Faker::Lorem.sentence,
+        description:    Faker::Lorem.paragraph
+    )
+end
+
+topics = Topic.all
+
 # Note: By calling 'User.new' instead of 'create', we create an instance
 #       of User which isn't immediately saved to the database.
 
@@ -99,12 +117,18 @@ member.save!
 # Checkpoint #40 - Topics and Posts
 #
 # Create Topics
-15.times do
-    Topic.create!(
-        name:           Faker::Lorem.sentence,
-        description:    Faker::Lorem.paragraph
-    )
-end
+#
+# Mentor feedback:
+#   Seeds are not OK. You use topics when creating posts, so you should define
+#   topics first.
+#
+# Note: Move the following could higher up in this file under 'Create Users'
+# 15.times do
+#    Topic.create!(
+#        name:           Faker::Lorem.sentence,
+#        description:    Faker::Lorem.paragraph
+#    )
+# end
 
 topics = Topic.all
 
