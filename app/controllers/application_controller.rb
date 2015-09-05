@@ -25,6 +25,6 @@ class ApplicationController < ActionController::Base
   
   # Checkpoint #37 - Authentication Continued
   def configure_permitted_parameters
-    devise_parameters_sanitizer.for(:sign_up) << :name
+    devise_parameter_sanitizer.for(:sign_up) << :name
   end
 end
