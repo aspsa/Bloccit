@@ -1,3 +1,7 @@
+# Checkpoint #40 - Topics and Posts
+#
+# Update 'post.rb' and 'topic.rb' to reflect the
+# 'topic_id' association.
 class Post < ActiveRecord::Base
     has_many :comments
     belongs_to :user

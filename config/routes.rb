@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   # get 'posts/new'
   # get 'posts/edit'
 
+  # Checkpoint # 40 - Topics and Posts
+  #
   # Mentor feedback:
   #   Delete line 15 (posts are nested under topics now).
   #
@@ -37,10 +39,17 @@ Rails.application.routes.draw do
   # By calling 'resources :posts' in the 'resources :topics' block, you are
   # instructing Rails to create nested routes. Review your new routes by
   # running 'rake routes | grep post'.
+  # resources :topics do
+  #  resources :posts, except: [:index]
+  # end
+  # resources :posts
+  
+  # Checkpoint #40 - Topics and Posts
+  #
+  # Use the shortcut for creating all the basic CRUD routes for a resource.
   resources :topics do
     resources :posts, except: [:index]
   end
-  
 
   # Checkpoint #33 - CRUD
   #

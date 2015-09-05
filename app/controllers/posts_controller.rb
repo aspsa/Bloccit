@@ -128,6 +128,9 @@ class PostsController < ApplicationController
   end
   
   def update
+    # Checkpoint #40 - Topics and Posts
+    @topic = Topic.find(params[:topic_id])
+    
     # Checkpoint #35 - More CRUD
     @post = Post.find(params[:id])
     
@@ -138,7 +141,10 @@ class PostsController < ApplicationController
     
     if @post.update_attributes(param.require(:post).permit(:title, :body))
       flash[:notice] = "Post was updated."
-      redirect_to @post
+      
+      # Checkpoint #40 - Topics and Posts
+      # redirect_to @post
+      redirect_to [@topic, @post]
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :edit

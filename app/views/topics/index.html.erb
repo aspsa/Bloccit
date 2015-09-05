@@ -13,11 +13,12 @@ we'll wrap the "New Topic" link in an 'if policy()'.
 <h1>Topics#index</h1>
 <p>Find me in app/views/topics/index.html.erb</p>
 -->
+
 <h1>Topics</h1>
 
 <div class="row">
     <div class="col-md-8">
-        <% @topics.each do |topic| %>
+        <%= @topics.each do |topic| %>
             <div class="media">
                 <div class="media-body">
                     <h4 class="media-heading">
@@ -36,3 +37,29 @@ we'll wrap the "New Topic" link in an 'if policy()'.
         <% end %>
     </div>
 </div>
+
+<!--
+<h1>Topics</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        &lt; @topics.each do |topic| &gt;
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        &lt;= link_to topic.name, topic &gt;
+                    </h4>
+                    <small>
+                        &lt;= topic.description &gt;
+                    </small>
+                </div>
+            </div>
+        &lt; end &gt;
+    </div>
+    <div class="col-md-4">
+        &lt; if policy(Topic.new).create? &gt;
+            &lt;= link_to "New Topic", new_topic_path, class: 'btn btn-success' &gt;
+        &lt; end &gt;
+    </div>
+</div>
+-->

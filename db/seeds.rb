@@ -18,7 +18,13 @@ users = User.all
 # Checkpoint #40 - Topics and Posts
 #
 # Create Topics
+# -------------
+# We also need to update 'seeds.rb', because none of the Posts in
+# the database currently have an associated topic. Create some new
+# topics first.
 #
+# (Note: I originally placed this code in the wrong part of this
+# file. The 'seeds.rb' file is executed sequentially in line order.)
 # Mentor feedback:
 #   Seeds are not OK. You use topics when creating posts, so you should define
 #   topics first.
@@ -48,6 +54,9 @@ topics = Topic.all
         user: users.sample,
         
         # Checkpoint #40 - Topics and Posts
+        #
+        # Modify the code that seeds posts to assign each post to a
+        # random topic.
         topic: topics.sample,
         
         title: Faker::Lorem.sentence,
