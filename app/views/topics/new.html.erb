@@ -1,15 +1,11 @@
 <!--
     Checkpoint #40 - Topics and Posts
-
     The Topics controller file was created by executing the following statement
     in the IRB:
-
          'rails g controller topics index new show edit'
-
 <h1>Topics#new</h1>
 <p>Find me in app/views/topics/new.html.erb</p>
 -->
-
 <h1>New Topic</h1>
 
 <div class="row">
@@ -40,36 +36,3 @@
         <% end %>
     </div>
 </div>
-
-<!--
-<h1>New Topic</h1>
-
-<div class="row">
-    <div class="col-md-4">
-        <p>Guidelines for topics:</p>
-        <ul>
-            <li>Make sure the topic is appropriate.</li>
-            <li>Never insult dogs.</li>
-            <li>Smile when you type.</li>
-        </ul>
-    </div>
-    <div class="col-md-8">
-        &lt; form_for @topic do |f| &gt;
-            <div class="form-group">
-                &lt; f.label :name &gt;
-                &lt; f.text_field :name, class: 'form-control', placeholder: "Enter topic name" &gt;
-            </div>
-            <div class="form-group">
-                &lt; f.label :description &gt;
-                &lt; f.text_area :description, rows: 8, class: 'form-control', placeholder: "Enter topic description" &gt;
-            </div>
-            <div class="form-group">
-                &lt; f.label :public, class: 'checkbox' do &gt;
-                    &lt; f.check_box :public &gt; Public topic
-                &lt;% end &gt;
-            </div>
-            &lt; f.submit "Save", class: 'btn btn-success' &gt;
-        &lt; end &gt;
-    </div>
-</div>
--->

@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150905001546) do
-=======
-ActiveRecord::Schema.define(version: 20150822021756) do
->>>>>>> checkpoint-40-topics-and-posts
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
