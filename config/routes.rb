@@ -41,6 +41,13 @@ Rails.application.routes.draw do
     resources :posts, except: [:index]
   end
   
+  # Assignment #40 - Topics and Posts
+  #
+  # Create the necessary routes to create and show post summaries
+  resources :summaries do
+    resources :posts, only: [:new, :create, :show]
+  end
+  
 
   # Checkpoint #33 - CRUD
   #
