@@ -4,7 +4,7 @@
 <h1><%= @summary.name %></h1>
 
 <% if policy(@summary).update? %>
-    <%= link_to "Edit Topic", edit_summary_path, class: 'btn btn-success' %>
+    <%= link_to "Edit Post", edit_topic_post_path, class: 'btn btn-success' %>
 <% end %>
 
 <div class="row">
@@ -13,11 +13,8 @@
         <div class="media">
             <div class="media-body">
                 <h4 class="media-heading">
-                    <%= link_to post.title, [@summary, post] %>
+                    <%= link_to "Post", topic_post_path(@topic, @post) %>
                 </h4>
-                <small>
-                    submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %><br />
-                </small>
             </div>
         </div>
     </div>

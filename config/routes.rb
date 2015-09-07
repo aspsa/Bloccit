@@ -38,15 +38,20 @@ Rails.application.routes.draw do
   # instructing Rails to create nested routes. Review your new routes by
   # running 'rake routes | grep post'.
   resources :topics do
-    resources :posts, except: [:index]
+    resources :posts, except: [:index] do
+      # Assignment #40 - Topics and Posts
+      #
+      # Define the necessary routes to create and show post summaries
+      resources :summaries, only: [:new, :create, :show]
+    end
   end
   
   # Assignment #40 - Topics and Posts
   #
   # Create the necessary routes to create and show post summaries
-  resources :summaries do
-    resources :posts, only: [:new, :create, :show]
-  end
+  #resources :posts do
+  #  resources :summaries, only: [:new, :create, :show]
+  #end
   
 
   # Checkpoint #33 - CRUD

@@ -34,6 +34,13 @@
     <div class="col-md-4">
         <% if policy(@post).edit? %>
             <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
+            
+            <!--
+                Assignment #40 - Topics and Posts
+                
+                Add a button to create a summary for this post
+            -->
+            <%= link_to "Add A Summary", new_topic_post_summary_path(@topic, @post, @summary), class: 'btn btn-success' %>
         <% end %>
     </div>
 </div>
