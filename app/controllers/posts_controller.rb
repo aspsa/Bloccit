@@ -130,15 +130,16 @@ class PostsController < ApplicationController
   def update
     # Checkpoint #35 - More CRUD
     @post = Post.find(params[:id])
+    @topic = Topic.find(params[:topic_id])
     
     # Checkpoint #39 - Authorization
     #
     # Call authorize after the objects you've authorized have been defined.
     authorize @post
     
-    if @post.update_attributes(param.require(:post).permit(:title, :body))
+    if @post.update_attributes(params.require(:post).permit(:title, :body))
       flash[:notice] = "Post was updated."
-      redirect_to @post
+      redirect_to [@topic, @post]
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :edit
