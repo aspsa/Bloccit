@@ -15,22 +15,29 @@
     </div>
     <div class="col-md-8">
         <!--
+            Checkpoint #42 - Validating Posts
+
+            (See detailed comments on the posts 'edit' view template.
+        -->
+        <!--
             Checkpoint #40 - Topics and Posts
             
             &lt;%= form_for @post do |f| %&gt;
         -->
-        <%= form_for [@topic, @post] do |f| %>
+        <!-- &lt;%= form_for [@topic, @post] do |f| &gt;%
             <div class="form-group">
-                <%= f.label :title %>
-                <%= f.text_field :title, class: 'form-control', placeholder: "Enter post title" %>
+                &lt;%= f.label :title &gt;%
+                &lt;%= f.text_field :title, class: 'form-control', placeholder: "Enter post title" &gt;%
             </div>
             <div class="form-group">
-                <%= f.label :body %>
-                <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
+                &lt;%= f.label :body &gt;%
+                &lt;%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" &gt;%
             </div>
             <div class="form-group">
-                <%= f.submit "Save", class: 'btn-btn-success' %>
+                &lt;%= f.submit "Save", class: 'btn-btn-success' &gt;%
             </div>
-        <% end %>
+        &lt;% end &gt;% -->
+        
+        <%= render partial: 'form', locals: { topic: @topic, post: @post } %>
     </div>
 </div>

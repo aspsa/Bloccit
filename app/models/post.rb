@@ -11,4 +11,10 @@ class Post < ActiveRecord::Base
     
     # Checkpoint #38 - Associations
     default_scope { order('created_at DESC') }
+    
+    # Checkpoint #42 - Validating Posts
+    validates :title, length: { minimum: 5 }, presence: true
+    validates :body, length: { minimum: 20 }, presence: true
+    validates :topic, presence: true
+    validates :user, presence: true
 end
