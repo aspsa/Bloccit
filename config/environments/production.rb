@@ -46,7 +46,9 @@ Rails.application.configure do
   #
   # Checkpoint #41 - Interlude
   #
-  # Enable SSL
+  # While we have production.rb open, let's make another setting change that is
+  # unrelated to our Action Mailer settings, but pertinent while we're working
+  # on application security.
   config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
@@ -84,6 +86,9 @@ Rails.application.configure do
   
   # Checkpoint #41 - Interlude
   #
-  # Email in production
+  # There are a few steps needed to be able to send emails in your Production
+  # environment. First, open config/environments/production.rb and add the
+  # following lines to the bottom of the file: (Replace "bloccit" with your
+  # app's name).
   config.action_mailer.default_url_options = { host: 'http://aspsa-bloccit.herokuapp.com/' }
 end

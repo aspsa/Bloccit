@@ -12,7 +12,11 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = '001MeMyselfAndI@gmail.com'
+  #
+  # Checkpoint #41 - Interlude
+  # Next, open config/initializers/devise.rb and change or add the following
+  # setting (using your email address).
+  config.mailer_sender = 'aspsasendgrid@gmail.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
