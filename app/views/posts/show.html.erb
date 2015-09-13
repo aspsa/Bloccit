@@ -13,7 +13,12 @@
     Checkpoint #33 - CRUD
     Replace previous code with post-specific code.
 -->
-<h1><%= @post.title %></h1>
+<!--
+    Checkpoint #43 - Post Markdown
+    
+<h1>&lt;%= @post.title %&gt;</h1>
+-->
+<h1><%= markdown_to_html @post.title %></h1>
 
 <!-- Checkpoint #35 - More CRUD, the 'link_to statement -->
 <!-- Checkpoint #39 - Authorization, the surrouding 'if' -->
@@ -29,7 +34,12 @@
 -->
 <div class="row">
     <div class="col-md-8">
-        <p><%= @post.body %></p>
+        <!--
+            Checkpoint #43 - Post Markdown
+            
+        <p>&lt;%= @post.body %&gt;</p>
+        -->
+        <p><%= markdown_to_html @post.body %></p>
     </div>
     <div class="col-md-4">
         <% if policy(@post).edit? %>

@@ -101,3 +101,6 @@ gem 'figaro', '1.0'
 
 # Checkpoint #39 - Authorization
 gem 'pundit'
+
+# Checkpoint #43 - Post Markdown
+gem 'redcarpet'
