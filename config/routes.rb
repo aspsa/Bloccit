@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
   
+  # Checkpoint #41 - Interlude
+  #
+  # To make changing user's name possible, we've added a second form under the
+  # "Edit personal information" heading. To make it work we also need to modify
+  # the routes and make a dedicated UsersController. Open config/routes.rb file
+  # and add the following line below the devise_for :users line.
+  resources :users, only: [:update]
+  
   # Checkpoint #33 - CRUD
   #
   # "We'll remove those in favor of a more succinct way of creating 'Post'

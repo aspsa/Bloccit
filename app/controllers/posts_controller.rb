@@ -66,7 +66,11 @@ class PostsController < ApplicationController
     # Checkpoint #40 - Topics and Posts
     @topic = Topic.find(params[:topic_id])
     
-    @post = Post.new(params.require(:post).permit(:title, :body))
+    # Checkpoint #41 - Interlude
+    #
+    # Apply DRY.
+    # @post = Post.new(params.require(:post).permit(:title, :body))
+    @posts = Post.new(post_params)
     
     # Checkpoint #38 - Associations
     @post.user = current_user
@@ -137,12 +141,25 @@ class PostsController < ApplicationController
     # Call authorize after the objects you've authorized have been defined.
     authorize @post
     
-    if @post.update_attributes(params.require(:post).permit(:title, :body))
+    # Checkpoint #41 - Interlude
+    #
+    # Apply DRY.
+    # if @post.update_attributes(params.require(:post).permit(:title, :body))
+    if @post.update_attributes(post_params)
       flash[:notice] = "Post was updated."
       redirect_to [@topic, @post]
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :edit
     end
+  end
+
+  # Checkpoint #41 - Interlude
+  #
+  # Apply DRY.
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 end

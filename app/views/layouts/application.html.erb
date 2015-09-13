@@ -63,7 +63,19 @@
           
           Hello &lt;%= current_user.email %&gt;! lt;%= link_to "Sign out", destroy_user_session_path, method: :delete %&gt;
         -->
-        Hello <%= current_user.name %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        
+        <!--
+          Checkpoint #41 - Interlude
+          
+          Make the following changes to app/views/layouts/application.html.erb
+          
+        Hello &lt;%= current_user.name %&gt;! &lt;%= link_to "Sign out", destroy_user_session_path, method: :delete %&gt;
+        
+          This change creates a link to the signed-in user's profile edit page.
+          The link text displays the user's email if the user's name hasn't been
+          set.
+        -->
+        Hello <%= link_to (current_user.name || current_user.email), edit_user_registration_path %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to "Sign In", new_user_session_path %> or
         <%= link_to "Sign Up", new_user_registration_path %>
