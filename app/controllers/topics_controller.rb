@@ -35,7 +35,11 @@ class TopicsController < ApplicationController
   end
   
   def create
-    @topic = Topic.new(params.require(:topic).permit(:name, :description, :public))
+    # Assignment #41 - Interlude
+    #
+    # Apply DRY.
+    # @topic = Topic.new(params.require(:topic).permit(:name, :description, :public))
+    @topic = Topic.new(topic_params)
     authorize @topic
     
     if @topic.save
@@ -50,11 +54,27 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     authorize @topic
     
-    if @topic.update_attributes(params.require(:topic).permit(:name, :description, :public))
+    # Assignment #41 - Interlude
+    #
+    # Apply DRY.
+    #
+    # if @topic.update_attributes(params.require(:topic).permit(:name, :description, :public))
+    if @topic.update_attributes(topic_params)
       redirect_to @topic
     else
       flash[:error] = "Error saving topic. Please try again."
       render :edit
     end
+  end
+  
+  # Assignment #41 - Interlude
+  #
+  # Let's clean up TopicsController in the same way we refactored PostsController.
+  #   Create a private topic_params method in TopicsController.
+  #   Refactor the create and update methods to use the topic_params method.
+  private
+  
+  def topic_params
+    params.require(:topic).permit(:name, :description, :public)
   end
 end
