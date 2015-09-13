@@ -70,7 +70,7 @@ class PostsController < ApplicationController
     #
     # Apply DRY.
     # @post = Post.new(params.require(:post).permit(:title, :body))
-    @posts = Post.new(post_params)
+    @post = Post.new(post_params)
     
     # Checkpoint #38 - Associations
     @post.user = current_user

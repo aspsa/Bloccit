@@ -13,6 +13,11 @@ class Post < ActiveRecord::Base
     default_scope { order('created_at DESC') }
     
     # Checkpoint #42 - Validating Posts
+    #
+    # Validate the Post model with the following rules:
+    #   A Post must have at least five characters in the title;
+    #   A Post must have at least 20 characters in the body;
+    #   A Post must have an associated topic and user.
     validates :title, length: { minimum: 5 }, presence: true
     validates :body, length: { minimum: 20 }, presence: true
     validates :topic, presence: true

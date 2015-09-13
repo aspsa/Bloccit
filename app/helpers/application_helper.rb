@@ -24,7 +24,7 @@
 # hash. It then creates the symbol-specified HTML tag with the block
 #contents (and, if specified, the options).
 module ApplicationHelper
-    def from_group_tag(errors, &block)
+    def form_group_tag(errors, &block)
         if errors.any?
             content_tag :div, capture(&block), class: 'form-group has-error'
         else
