@@ -32,13 +32,16 @@ module ApplicationHelper
         end
     end
     
-    # Checkpoint #43 - Post Markdown
+    # Assignment #43 - Post Markdown
+    #
+    # Remove the markdown_to_html method from application_helper.rb.
+=begin
     def markdown_to_html(markdown)
         renderer = Redcarpet::Render::HTML.new
         extensions = {fenced_code_blocks: true}
         redcarpet = Redcarpet::Markdown.new(renderer, extensions)
         
-        # Checkpoint #43 - Post Markdown
+        # Assigment #43 - Post Markdown
         #
         # Note the call to html_safe. Rails ordinarily "escapes" strings
         # rendered to HTML, turning < to &lt; (the "HTML entity" for "less
@@ -47,4 +50,5 @@ module ApplicationHelper
         # we do here. To get around this escaping, we call html_safe.
         (redcarpet.render markdown).html_safe
     end
+=end
 end
