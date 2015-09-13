@@ -1,0 +1,32 @@
+<!--
+    Assignment #42 - Validating Posts
+
+    Create a form partial for topics.
+-->
+<%= form_for topic do |f| %>
+    <% if topic.errors.any? %>
+        <div class="alert alert-danger">
+            <h4>There are <%= pluralize(topic.errors.count, "error") %>.</h4>
+            <ul>
+                <%= topic.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <!--
+        Assignment #42 - Validating Posts
+        
+        Use the form_group_tag helper method created in the checkpoint to
+        display errors for invalid topics.
+    -->
+    <%= form_group_tag(topic.errors[:name]) do %>
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', placeholder: "Enter topic name" %>
+    <% end %>
+    <div class="form-goup">
+        <%= f.submit "Save", class: 'btn btn-success'%>
+    </div>
+
+    <%= render partial: 'form', locals: { topic: @topic } %>
+<% end %>
