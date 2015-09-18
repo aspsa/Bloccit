@@ -47,7 +47,7 @@
                             
                         &lt;%= link_to post.title, [@topic, post] %&gt;
                         -->
-                        <%= link_to (markdown_to_html post.title), [@topic, post] %>
+                        <%= link_to post.markdown_title, [@topic, post] %>
                     </h4>
                     <small>
                         submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %><br />
