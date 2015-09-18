@@ -11,5 +11,5 @@ class Topic < ActiveRecord::Base
     # In addition to validating posts, we should validate topics.
     #   Add a validation to ensure that Topic names are at least five characters
     #       long.
-    validates :name, length: { minimum: 5 }, presence: truep.va
+    validates :name, length: { minimum: 5 }, presence: true
 end
