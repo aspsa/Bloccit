@@ -1,0 +1,35 @@
+<!--
+    Checkpoint #46 - Comments
+    
+    Create a 'comments/_form.html.erb' partial in a new comments view directory
+    so users can submit new comments on a post. The partial should take 'topic'
+    and 'post' local variables. The form within the partial should submit to
+    '[topic, post, post.comments.new]', so that it routes correctly given our
+    nested routes. It should also initialize a new comment for users to create
+    by submitting the form.
+
+    The 'app/views/posts/show.html.erb' view belongs to PostsController, but the
+    'comments/_form.html.erb' partial belongs to the CommentsController. Refer
+    to the RailsGuides section on "rendering an action's template from another
+    controller" [Source:
+    http://guides.rubyonrails.org/layouts_and_rendering.html#rendering-an-action-s-template-from-another-controller.
+-->
+<%= form_for [topic, post, comments] do |f| %>
+    <% if comment.errors.any? %>
+        <div class="alert alert-danger">
+            <h4>There are <%= pluralize(comment.errors.count, "error") %>.</h4>
+            <ul>
+                <% comment.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <%= form_group_tag(post.errors[:body]) do %>
+        <%= f.label :body %>
+        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter comment" %>
+    <% end %>
+    <div class="form-group">
+        <%= f.submit "Save", class: 'btn btn-success' %>
+    </div>
+<% end %>

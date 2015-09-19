@@ -1,0 +1,24 @@
+<!--
+    Checkpoint #46 - Comments
+    
+    View changes:
+        - Create a '_comment.html.erb' partial in the comments directory. Use it
+          in the 'posts#show' view to show the body of each comment already
+          associated with the post. Whereas our above form partial should render
+          the form for submitting a new comment, this comment partial should
+          render the relevant information for a single preexisting comment
+          associated with our '@post'. Because this partial renders a single
+          comment, we need to call it multiple times, rendering a partial for
+          each comment in @comments. This is a good candidate for an each loop.
+-->
+<div class="row">
+    <div class="col-md-8">
+        <p><%= @comment.body %></p>
+        <p><%= markdown_to_html @comment.body %></p>
+    </div>
+    <div class="col-md-4">
+        <% if policy(@comment).edit? %>
+            <%= link_to "Edit", edit_topic_post_comment_path(@topic, @post, @comment), class: 'btn btn-success' %>
+        <% end %>
+    </div>
+</div>

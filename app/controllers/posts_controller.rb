@@ -34,6 +34,14 @@ class PostsController < ApplicationController
 =end
 
   def show
+    # Checkpoint #46 - Comments
+    #
+    # View changes:
+    #   - You'll need to show comments associated with a post, so modify the
+    #     posts_controller to provide the requisite instance variable to
+    #     'posts/show.html.erb'.
+    @comment = Comment.find(params[:id])
+
     # Checkpoint #33 - CRUD
     #
     # "...before we update the view, let's go back to 'posts_controller.rb" and
@@ -49,7 +57,14 @@ class PostsController < ApplicationController
     # the link was clicked. Rails controllers parse this request information
     # into a 'params' hash available in the controller and its associated
     # views."
-    @post = Post.find(params[:id])
+    #
+    # Checkpoint #46 - Comments
+    #
+    # Given the nesting structure, change this here to reflect the following
+    # URL: '/topics/:topic_id/posts/:post_id/comments'
+    #
+    # @post = Post.find(params[:id])
+    @post = Post.find(params[:post_id])
     
     # Checkpoint #40 - Topics and Posts
     #

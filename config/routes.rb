@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'comments/:new'
+
   devise_for :users
   
   # Checkpoint #41 - Interlude
@@ -46,7 +48,23 @@ Rails.application.routes.draw do
   # instructing Rails to create nested routes. Review your new routes by
   # running 'rake routes | grep post'.
   resources :topics do
-    resources :posts, except: [:index]
+    # resources :posts, except: [:index]
+    #
+    # Checkpoint #46 - Comments
+    #
+    # Nest the comments resource under 'resources :post's in 'routes.rb.'' You
+    # only have one comment action for now, create, so only create the routes
+    # that you need.
+    #
+    # Hint: Use only: instead of except.
+    #
+    # By nesting comments inside of 'posts', they'll be nested inside 'topics'
+    # as well. As the 'create' url, '/topics/:topic_id/posts/:post_id/comments',
+    # suggests, this "deep nesting" can get complicated, and we should refactor
+    # it.
+    resources :posts, except: [:index] do
+      resources :comments, only: [:new, :create]
+    end
   end
   
 

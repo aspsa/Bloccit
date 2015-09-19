@@ -71,7 +71,14 @@ posts = Post.all
     Comment.create!(
         # Checkpoint #38 - Associations
         # user: users.sample,   # We have not yet associated Users with Comments
-        
+        #
+        # Checkpoint #46 - Comments
+        #
+        # Model changes:
+        #   - Modify the 'seeds.rb' file to create valid comments when you run
+        #     'db:reset'
+        user: users.sample,
+
         post: posts.sample,
         body: Faker::Lorem.paragraph
     )
