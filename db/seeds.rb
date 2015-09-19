@@ -30,7 +30,15 @@ users = User.all
 #   topics first.
 #
 # Note: Commented out below and moved here.
-15.times do
+#
+# Assignment #45 - Pagination
+#
+# 'will_paginate' works well if we have a few hundred posts, but what if Bloccit
+# goes viral and receives thousands of posts?
+#   - Modify seeds.rb to create larger numbers of topics and posts.
+#
+# 15.times do
+1500.times do
     Topic.create!(
         name:           Faker::Lorem.sentence,
         description:    Faker::Lorem.paragraph
@@ -48,7 +56,15 @@ topics = Topic.all
 # The 'save!' method then saves this User to the database.
 
 # Create Posts
-50.times do
+#
+# Assignment #45 - Pagination
+#
+# 'will_paginate' works well if we have a few hundred posts, but what if Bloccit
+# goes viral and receives thousands of posts?
+#   - Modify seeds.rb to create larger numbers of topics and posts.
+#
+# 50.times do
+5000.times do
     Post.create!(
         # Checkpoint #38 - Associations
         user: users.sample,

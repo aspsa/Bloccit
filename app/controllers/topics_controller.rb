@@ -21,7 +21,27 @@ class TopicsController < ApplicationController
     # per page, starting on page number params[:page].
     #
     # @topics = Topic.all
-    @topics = Topic.paginate(page: params[:page], per_page: 10)
+    #
+    # Assignment #45 - Pagination
+    #
+    # 'will_paginate' works well if we have a few hundred posts, but what if
+    # Bloccit goes viral and receives thousands of posts?
+    #   - nstead of displaying 10 posts per page, display 100 post per page by
+    # using the per_page(num) method in 'TopicsController#show'.
+    #
+    # @topics = Topic.paginate(page: params[:page], per_page: 10)
+    #
+    # @topics = Topic.paginate(page: params[:page], per_page: 100)
+    #
+    # Use the default model based upon the following direction in the
+    # assignment
+    #   - 'will_paginate' also allows you to set the number of items per page
+    #     in the model. Use the 'per_page=(num)'' method in Topic to display 50
+    #     topics per page. You'll need to modify 'TopicsController' to use the
+    #     model default.
+    #
+    # (See the 'Topic' model for the pagination instructions.)
+    @topics = Topic.paginate(page: params[:page])
     authorize @topics
   end
 
