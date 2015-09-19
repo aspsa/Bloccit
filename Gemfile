@@ -104,3 +104,8 @@ gem 'pundit'
 
 # Checkpoint #43 - Post Markdown
 gem 'redcarpet'
+
+# Checkpoint #44 - Uploading Images
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'

@@ -22,3 +22,13 @@
 =======
 /config/application.yml
 >>>>>>> checkpoint-37-authentication-continued
+
+# Checkpoint #44 - Uploading Images
+#
+# It's a good time to check in your code and deploy. Before you do, make one
+# more change to .gitignore. CarrierWave uses a default location to store files
+# locally, and even though we're using S3, we want to ignore this directory
+# anyhow. Open .gitignore and add the following.
+#
+# CarrierWave image
+public/uploads

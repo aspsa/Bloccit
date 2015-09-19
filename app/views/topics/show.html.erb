@@ -49,8 +49,23 @@
                         -->
                         <%= link_to (markdown_to_html post.title), [@topic, post] %>
                     </h4>
+                    
+                    <!--
+                        Checkpoint #44 - Uploading Images
+                        
+                        Let's make a similar change to topics#show as was done
+                        with posts#show, so that each related post is associated
+                        with its user's image.
+
                     <small>
-                        submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %><br />
+                        submitted &lt;%= time_ago_in_words(post.created_at) %&gt; ago by &lt;%= post.user.name %&gt;<br />
+                    </small>
+                    -->
+                    <small>
+                        <%= image_tag(post.user.avatar.tiny.url) if post.user.avatar? %>
+                        submitted <%= time_ago_in_words(post.created_at) %> ago by
+                        <%= post.user.name %><br />
+                        <%= post.comments.count %> Comments
                     </small>
                 </div>
             </div>

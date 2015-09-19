@@ -19,6 +19,20 @@ class UsersController < ApplicationController
     private
     
     def user_params
-        params.require(:user).permit(:name)
+        # Checkpoint #44 - Uploading Images
+        #
+        # We've added a new "avatar" attribute to the user model. Now we need
+        # to allow this attribute to be updated in the users_controller. Open
+        # 'app/controllers/users_controller.rb' and change the definition of
+        # the user_params method to as follows.
+        #
+        # Because we've "extracted" user_params to its own method rather than
+        # repeating the require and permit calls in multiple places, this edit
+        # only needs to be made in one place. Also note that we only need to
+        # permit the attributes we want to update here. We can leave password
+        # and other permissions to Devise.
+        #
+        # params.require(:user).permit(:name)
+        params.require(:user).permit(:name, :avatar)
     end
 end

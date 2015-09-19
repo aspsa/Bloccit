@@ -1,104 +1,111 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Bloccit</title>
-  <meta name="viewport" contgent="width=device-width, initial-scale=1"/>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div class="container">
-    <ul class="nav nav-tabs">
-      <!--
-        The Rails 'link_to' method returns a qualified HTML anchor tag. For example,
-      
-            link_to "Home", welcome_index_path
-      
-        renders
-      
-            <a href="/welcome/index">Home</a>
-      -->
-      
-      <!--
-        Checkpoint #33 - CRUD
-        
-        "...change the two link_to lines:
-      <li>&lt;%= link_to "Bloccit", welcome_index_path %&gt;</li>
-      <li>&lt;%= link_to "About", welcome_about_path %&gt;</li>
-      -->
-      <li><%= link_to "Bloccit", root_path %></li>
-      <li><%= link_to "About", about_path %></li>
-    </ul>
-    
-    <!-- Checkpoint #35 - More CRUD -->
-    <% if flash[:notice] %>
-      <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:notice] %>
-      </div>
-    <% elsif flash[:error] %>
-      <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:error] %>
-      </div>
-    <% elsif flash[:alert] %>
-      <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:alert] %>
-      </div>
-    <% end %>
-    
-    <!--
-      Checkpoint #37 - Authentication Continued
-      
-      See the 'Current User' section.
-    -->
-    <div class="pull-right user-info">
-      <% if current_user %>
+  <head>
+    <title>Bloccit</title>
+    <meta name="viewport" contgent="width=device-width, initial-scale=1"/>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="container">
+      <ul class="nav nav-tabs">
         <!--
-          Checkpoint #40 - Topics and Posts
-          
-          Update the 'user-info div' to user the 'current_user' name.
-          
-          Hello &lt;%= current_user.email %&gt;! lt;%= link_to "Sign out", destroy_user_session_path, method: :delete %&gt;
+          The Rails 'link_to' method returns a qualified HTML anchor tag. For example,
+        
+              link_to "Home", welcome_index_path
+        
+          renders
+        
+              <a href="/welcome/index">Home</a>
         -->
         
         <!--
-          Checkpoint #41 - Interlude
+          Checkpoint #33 - CRUD
           
-          Make the following changes to app/views/layouts/application.html.erb
-          
-        Hello &lt;%= current_user.name %&gt;! &lt;%= link_to "Sign out", destroy_user_session_path, method: :delete %&gt;
-        
-          This change creates a link to the signed-in user's profile edit page.
-          The link text displays the user's email if the user's name hasn't been
-          set.
+          "...change the two link_to lines:
+        <li>&lt;%= link_to "Bloccit", welcome_index_path %&gt;</li>
+        <li>&lt;%= link_to "About", welcome_about_path %&gt;</li>
         -->
-        Hello <%= link_to (current_user.name || current_user.email), edit_user_registration_path %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Sign In", new_user_session_path %> or
-        <%= link_to "Sign Up", new_user_registration_path %>
+        <li><%= link_to "Bloccit", root_path %></li>
+        <li><%= link_to "About", about_path %></li>
+      </ul>
+      
+      <!-- Checkpoint #35 - More CRUD -->
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:error] %>
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:error] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert alert-warning">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:alert] %>
+        </div>
       <% end %>
-    </div>
+      
+      <!--
+        Checkpoint #37 - Authentication Continued
+        
+        See the 'Current User' section.
+      -->
+      <div class="pull-right user-info">
+        <% if current_user %>
+          <!--
+            Checkpoint #44 - Uploading Images
+            
+            Let's modify our header nav so it displays user images if available.
+          -->
+          <%=   image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
+
+          <!--
+            Checkpoint #40 - Topics and Posts
+            
+            Update the 'user-info div' to user the 'current_user' name.
+            
+            Hello &lt;%= current_user.email %&gt;! lt;%= link_to "Sign out", destroy_user_session_path, method: :delete %&gt;
+          -->
+          
+          <!--
+            Checkpoint #41 - Interlude
+            
+            Make the following changes to app/views/layouts/application.html.erb
+            
+          Hello &lt;%= current_user.name %&gt;! &lt;%= link_to "Sign out", destroy_user_session_path, method: :delete %&gt;
+          
+            This change creates a link to the signed-in user's profile edit page.
+            The link text displays the user's email if the user's name hasn't been
+            set.
+          -->
+          Hello <%= link_to (current_user.name || current_user.email), edit_user_registration_path %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path %> or
+          <%= link_to "Sign Up", new_user_registration_path %>
+        <% end %>
+      </div>
+      
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:error] %>
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:error] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert alert-warning" >
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+      <% end %>
     
-    <% if flash[:notice] %>
-      <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:notice] %>
-      </div>
-    <% elsif flash[:error] %>
-      <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:error] %>
-      </div>
-    <% elsif flash[:alert] %>
-      <div class="alert alert-warning" >
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-      </div>
-    <% end %>
-  
-    <%= yield %>
-</div>
-</body>
+      <%= yield %>
+    </div>
+  </body>
 </html>
