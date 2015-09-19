@@ -8,7 +8,20 @@
 # are added next.
 class TopicsController < ApplicationController
   def index
-    @topics = Topic.all
+    # Checkpoint #45 - Pagination
+    #
+    # Before we begin, think about where you might start implementing
+    # 'will_paginate'. You know that the goal is to separate out the collections
+    # of topics and posts, so we should start where we collect topics and posts
+    # for display.
+    #
+    # We call paginate on the collection of posts and topics, and pass it some
+    # arguments that will dictate how the pagination will eventually render. In
+    # this case, we instruct paginate to select a subset of 10 posts / topics
+    # per page, starting on page number params[:page].
+    #
+    # @topics = Topic.all
+    @topics = Topic.paginate(page: params[:page], per_page: 10)
     authorize @topics
   end
 
@@ -25,7 +38,11 @@ class TopicsController < ApplicationController
     # To access the associated posts, we'll need to load that model data from
     # our controller. Update 'topics_controller.rb' and provide a '@posts'
     # variable that has been scoped for '@topic'.
-    @posts = @topic.posts
+    
+    # Checkpoint #45 - Pagination
+    #
+    # @posts = @topic.posts
+    @posts = @topic.posts.paginate(page: params[:page], per_page: 10)
     authorize @topic
   end
 

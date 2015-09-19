@@ -70,6 +70,15 @@
                 </div>
             </div>
         <% end %>
+        
+        <!--
+            Checkpoint #45 - Pagination
+            
+            Make the change to the topics#show view that will paginate its list
+            of posts. Review your changes on localhost. 'will_paginate' will
+            continue to make new pages for every ten topics / posts created.
+        -->
+        <%= will_paginate @posts %>
     </div>
     <div class="col-md-4">
         <% if policy(Post.new).create? %>

@@ -25,6 +25,22 @@ we'll wrap the "New Topic" link in an 'if policy()'.
                 </div>
             </div>
         <% end %>
+        
+        <!--
+            Checkpoint #45 - Pagination
+            
+            Now that our controller is generating a collection of paginated
+            topics let's modify the index view to display them. Open
+            'app/views/topics/index.html.erb' and add the line of code with
+            'will_paginate'.
+            
+            This line creates the visual interface for turning pages. As you can
+            tell if you remove it, your resource collection will still be
+            limited to the number of objects specified in the paginate call in
+            your controller. You can still navigate pages by updating the URL
+            query string.
+        -->
+        <%= will_paginate @topics %>
     </div>
     <div class="col-md-4">
         <% if policy(Topic.new).create? %>

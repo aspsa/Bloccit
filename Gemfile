@@ -109,3 +109,6 @@ gem 'redcarpet'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+
+# Checkpoint #45 - Pagination
+gem 'will_paginate', '~> 3.0.5'
