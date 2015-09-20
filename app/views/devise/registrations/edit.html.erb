@@ -56,7 +56,7 @@
         <%= f.label :email %>
         <%= f.email_field :email, class: 'form-control', placeholder: "Enter email" %>
       </div>
-      <% if_devise_mapping_confirmable? && resource_pending_reconfirmation? %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div class="form-group">
           <p>Waiting confirmationfor:</p>
           <%= resource.unconfirmed_email %>
@@ -67,7 +67,8 @@
         <%= f.password_field :password, class: 'form-control', placeholder: "Enter password" %>
       </div>
       <div class="form-group">
-        <%= f.label :password_confirmation, class: 'form-control', placeholder: "Enter password confirmation" %>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Enter password confirmation" %>
       </div>
       <div class="form-group">
         <%= f.password_field :current_password, class: 'form-control', placeholder: "Enter password" %>
@@ -77,6 +78,7 @@
         <%= f.submit "Update", class: 'btn btn-success' %>
       </div>
     <% end %>
+
     
     <h3>Edit personal information</h3>
     <%= form_for(current_user) do |f| %>
@@ -89,14 +91,14 @@
         Checkpoint #44 - Uploading Images
       -->
       <% if current_user.avatar? %>
-        <div class="form[-group">
+        <div class="form-group">
           <p>Current avatar</p>
           <%= image_tag(current_user.avatar.profile.url) %>
         </div>
       <% end %>
       <div class="form-group>">
         <%= f.label :avatar %>
-        <%= f.file_field :avater %>
+        <%= f.file_field :avatar %>
         <%= f.hidden_field :avatar_cache %>
       </div>
       
