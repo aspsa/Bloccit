@@ -160,6 +160,10 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    # Assignment #44 - Uploading Images
+    #
+    # Posts should have images as well as users.
+    #   - Modify PostsController to make image a permitted parameter.
+    params.require(:post).permit(:title, :body, :image)
   end
 end

@@ -67,6 +67,18 @@
                         <%= post.user.name %><br />
                         <%= post.comments.count %> Comments
                     </small>
+                    
+                    <!--
+                        Assignment #44 - Uploading Images
+                        
+                        Posts should have images as well as users.
+                            - Display uploaded images in 'posts#show' and 'topics#show'.
+                    -->
+                    <small>
+                        <%= image_tag(@post.image.tiny.url) if @post.image? %>
+                        submitted <%= time_ago_in_words(@post.created_at) %> ago by
+                        <%= @post.user.name %>
+                    </small>
                 </div>
             </div>
         <% end %>

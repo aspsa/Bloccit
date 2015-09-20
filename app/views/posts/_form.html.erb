@@ -40,6 +40,15 @@
             </ul>
         </div>
     <% end %>
+
+    <!--
+
+        Assignmet #44 - Uploading Images
+    
+           - Add image uploading to app/views/posts/_form.html.erb.
+    -->
+    <%= mount_uploader :image, ImageUploader %>
+
     <%= form_group_tag(post.errors[:title]) do %>
         <%= f.label :title %>
         <%= f.text_field :title, class: 'form-control', placeholder: "Enter post title" %>
