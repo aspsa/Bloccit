@@ -8,7 +8,13 @@ class Post < ActiveRecord::Base
     
     # Checkpoint #40 - Topics and Posts
     belongs_to :topic
-
+    
+    # Assignment #44 - Uploading Images
+    #
+    # Dalibor's Comment:
+    #   Modify Post to mountuploader for the image attribute.
+    mount_uploader :image, ImageUploader
+    
     # Checkpoint #38 - Associations
     default_scope { order('created_at DESC') }
     
