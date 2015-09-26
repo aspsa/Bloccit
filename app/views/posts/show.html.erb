@@ -32,6 +32,20 @@
 &lt;% end %&gt;
 <p>&lt;%= @post.body %&gt;</p>
 -->
+
+<!--
+    Checkpoint #46 - Comments
+    
+    View changes:
+        - Create a '_comment.html.erb' partial in the comments directory. Use it
+          in the 'posts#show' view to show the body of each comment already
+          associated with the post. Whereas our above form partial should render
+          the form for submitting a new comment, this comment partial should
+          render the relevant information for a single preexisting comment
+          associated with our '@post'. Because this partial renders a single
+          comment, we need to call it multiple times, rendering a partial for
+          each comment in @comments. This is a good candidate for an each loop.
+-->
 <div class="row">
     <div class="col-md-8">
         <!--
@@ -39,17 +53,19 @@
             
             Open posts#show and add a user image to a post.
         -->
+
         <small>
             <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
             submitted <%= time_ago_in_words(@post.created_at) %> ago by
             <%= @post.user.name %>
         </small>
-        
+
         <!--
             Checkpoint #43 - Post Markdown
-            
-        <p>&lt;%= @post.body %&gt;</p>
-        -->
+
+        <p>%= @post.body %></p>
+        -->    
+
         <p><%= markdown_to_html @post.body %></p>
     </div>
     <div class="col-md-4">
@@ -58,3 +74,37 @@
         <% end %>
     </div>
 </div>
+
+<!--
+&lt;%= @comments.each do |c| %>
+    <!--
+    &lt;%= render partial: 'comment', locals: { topic: @topic, post: @post, comment: c } %&gt;
+    -->
+    <!--
+        Checkpoint #46 - Comments
+        
+        Bonus: Rails has a terse syntax for rendering partials with a collection
+        of objects. Once your each loop implementation is working, read section
+        3.4.5. Replace the each loop with a single call to render the
+        '@comments' collection. For more guidance, see the section on render
+        below.
+    --->
+    <!--
+    &lt;%= render partial: 'comment', collection: c %>
+&lt;% end %>
+-->
+
+<h3>Comments:</h3>
+<div class="row">
+    <div class="col-md-4">
+        <% if policy(@post).edit? %>
+            <%= link_to "Create Comment", topic_posts_path(@topic, @post, @comment.), class: 'btn btn-success' %>
+        <% end %>
+    </div>
+</div>
+
+<!--
+%= @comments.each do |p| %>
+    <p>%= p.body %></p>
+% end %>
+-->
