@@ -40,7 +40,7 @@ class PostsController < ApplicationController
     #   - You'll need to show comments associated with a post, so modify the
     #     posts_controller to provide the requisite instance variable to
     #     'posts/show.html.erb'.
-    @comment = Comment.find(params[:id])
+    #@comment = @post.comments.find(params[:id])
 
     # Checkpoint #33 - CRUD
     #
@@ -58,13 +58,6 @@ class PostsController < ApplicationController
     # into a 'params' hash available in the controller and its associated
     # views."
     #
-    # Checkpoint #46 - Comments
-    #
-    # Given the nesting structure, change this here to reflect the following
-    # URL: '/topics/:topic_id/posts/:post_id/comments'
-    #
-    # @post = Post.find(params[:id])
-    @post = Post.find(params[:post_id])
     
     # Checkpoint #40 - Topics and Posts
     #
@@ -75,6 +68,16 @@ class PostsController < ApplicationController
     # '@topic' is being used to generate a valid URL, but that variable does
     # not exist yet in this view. We add the '@topic' variable here.
     @topic = Topic.find(params[:topic_id])
+    
+    # Checkpoint #46 - Comments
+    #
+    # Given the nesting structure, change this here to reflect the following
+    # URL: '/topics/:topic_id/posts/:post_id/comments'
+    #
+    # @post = Post.find(params[:id])
+    @post = @topic.posts.find(params[:id])
+    
+    @comments = @post.comments.all
   end
   
   def create

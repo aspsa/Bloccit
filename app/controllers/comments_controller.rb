@@ -8,15 +8,13 @@
 class CommentsController < ApplicationController
   def new
     @topic = Topic.find(params[:topic_id])
-    @post = Post.find(params[:post_id])
-    @comment = Comment.new
+    @post = @topic.posts.find(params[:post_id])
+    @comment = @post.comments.new(comments_params)
     authorize @comment
   end
   
   def create
-    @topic = Topic.find(params[:topic_id])
-    @post = Post.find(params[:post_id])
-    @comment = Comment.new(comments_params)
+    redirect_to :new
     
     @comment.user = current_user
     

@@ -75,7 +75,8 @@
 </div>
 -->
 
-<%= @comments.each do |c| %>
+<!--
+&lt;%= @comments.each do |c| %>
     <!--
     &lt;%= render partial: 'comment', locals: { topic: @topic, post: @post, comment: c } %&gt;
     -->
@@ -88,5 +89,11 @@
         '@comments' collection. For more guidance, see the section on render
         below.
     --->
-    <%= render partial: 'comment', collection: c %>
+    <!--
+    &lt;%= render partial: 'comment', collection: c %>
+&lt;% end %>
+-->
+
+<%= @comments.each do |p| %>
+    <p><%= p.body %></p>
 <% end %>

@@ -18,7 +18,7 @@
     </div>
     <div class="col-md-4">
         <% if policy(@comment).edit? %>
-            <%= link_to "Edit", edit_topic_post_comment_path(@topic, @post, @comment), class: 'btn btn-success' %>
+            <%= link_to "Edit", topic_post_path(@topic, @post), class: 'btn btn-success' %>
         <% end %>
     </div>
 </div>
