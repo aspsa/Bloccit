@@ -45,7 +45,7 @@
           associated with our '@post'. Because this partial renders a single
           comment, we need to call it multiple times, rendering a partial for
           each comment in @comments. This is a good candidate for an each loop.
-
+-->
 <div class="row">
     <div class="col-md-8">
         <!--
@@ -53,27 +53,26 @@
             
             Open posts#show and add a user image to a post.
         -->
-<!--
+
         <small>
-            &lt;%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? ^&gt;
-            submitted &lt;%= time_ago_in_words(@post.created_at) %&gt; ago by
-            &lt;%= @post.user.name %&gt;
+            <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
+            submitted <%= time_ago_in_words(@post.created_at) %> ago by
+            <%= @post.user.name %>
         </small>
--->
+
         <!--
             Checkpoint #43 - Post Markdown
         -->    
-<!--
-        <p>&lt;%= @post.body %&gt;</p>
-        <p>&lt;%= markdown_to_html @post.body %&gt;</p>
+
+        <p><%= @post.body %></p>
+        <p><%= markdown_to_html @post.body %></p>
     </div>
     <div class="col-md-4">
-        &lt;% if policy(@post).edit? %&gt;
-            &lt;%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %&gt;
-        &lt;% end %&gt;
+        <% if policy(@post).edit? %>
+            <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
+        <% end %>
     </div>
 </div>
--->
 
 <!--
 &lt;%= @comments.each do |c| %>
@@ -94,6 +93,10 @@
 &lt;% end %>
 -->
 
-<%= @comments.each do |p| %>
-    <p><%= p.body %></p>
-<% end %>
+<h3>Comments:</h3>
+
+<!--
+%= @comments.each do |p| %>
+    <p>%= p.body %></p>
+% end %>
+-->
