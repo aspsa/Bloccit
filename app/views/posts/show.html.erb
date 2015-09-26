@@ -95,16 +95,5 @@
 -->
 
 <h3>Comments:</h3>
-<div class="row">
-    <div class="col-md-4">
-        <% if policy(@post).edit? %>
-            <%= link_to "Create Comment", topic_posts_path(@topic, @post, @comment.), class: 'btn btn-success' %>
-        <% end %>
-    </div>
-</div>
-
-<!--
-%= @comments.each do |p| %>
-    <p>%= p.body %></p>
-% end %>
--->
+<%= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
+<%= render partial: 'comments/comment', collection: @comments %>

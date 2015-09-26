@@ -76,8 +76,8 @@ class PostsController < ApplicationController
     #
     # @post = Post.find(params[:id])
     @post = @topic.posts.find(params[:id])
-    #@comment = @topic.posts.Comment.new
-    #@comments = @post.comments.all
+    @comment = Comment.new
+    @comments = @post.comments
   end
   
   def create

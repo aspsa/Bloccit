@@ -78,7 +78,7 @@ Rails.application.routes.draw do
     # suggests, this "deep nesting" can get complicated, and we should refactor
     # it.
     resources :posts, except: [:index] do
-      resources :comments, only: [:new, :create]
+      resources :comments, only: [:create]
     end
   end
   
