@@ -47,8 +47,17 @@
     
            - Add image uploading to app/views/posts/_form.html.erb.
     -->
-    <%= mount_uploader :image, ImageUploader %>
-
+    <% if post.image? %>
+      <div class="form-group">
+        <p>Current image</p>
+          <%= image_tag(post.image.profile.url) %>
+      </div>
+    <% end %>
+    <div class="form-group>">
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+        <%= f.hidden_field :image_cache %>
+    </div>
     <%= form_group_tag(post.errors[:title]) do %>
         <%= f.label :title %>
         <%= f.text_field :title, class: 'form-control', placeholder: "Enter post title" %>
