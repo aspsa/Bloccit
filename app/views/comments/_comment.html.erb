@@ -13,12 +13,6 @@
 -->
 <div class="row">
     <div class="col-md-8">
-        <p><%= @comment.body %></p>
-        <p><%= markdown_to_html @comment.body %></p>
-    </div>
-    <div class="col-md-4">
-        <% if policy(@comment).edit? %>
-            <%= link_to "Edit", topic_post_path(@topic, @post), class: 'btn btn-success' %>
-        <% end %>
+        <p><%= markdown_to_html comment.body %></p>
     </div>
 </div>

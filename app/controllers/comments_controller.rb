@@ -6,24 +6,19 @@
 #   - Fill in the 'create' action. It should create a new comment, associated
 #     with a post and the 'current_user' who created it.
 class CommentsController < ApplicationController
-  def new
-    @topic = Topic.find(params[:topic_id])
-    @post = @topic.posts.find(params[:post_id])
-    # authorize @comment
-  end
-  
   def create
-    redirect_to :new
-    
     # Checkpoint #46 - Comments
     #
     # Fill in the 'create' action. It should create a new comment associated
     # with a 'post' and the 'current_user' who created it.
-    @comment = @post.comments.new(comments_params)
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.find(params[:post_id])
+
+    @comment = @post.comments.new(comment_params)
     @comment.user = current_user
     
     # Checkpoint #40 - Topics and Posts
-    @comment.post.topic = @topic
+    # @comment.post.topic = @topic
     
     # authorize @comment
     
