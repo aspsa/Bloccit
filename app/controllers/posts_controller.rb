@@ -134,6 +134,12 @@ class PostsController < ApplicationController
     # We have access to this 'authorize' method because we included 'Pundet'
     # in 'ApplicationController', from which the 'PostController' inherits.
     authorize @post
+    
+    # Assignment #46 - Comments
+    #
+    # If you try to create a comment without first signing in, you'll encounter a no method 'id' for NilClass error. This error is thrown because current_user is nil when you're not signed in, and comment creation attempts to extract an id from this nil object.
+    #   - Use CommentPolicy in PostsController and CommentsController to authorize your comments.
+    authorize @comment
   end
 
   def edit

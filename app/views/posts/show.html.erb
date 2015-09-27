@@ -75,25 +75,19 @@
     </div>
 </div>
 
-<!--
-&lt;%= @comments.each do |c| %>
-    <!--
-    &lt;%= render partial: 'comment', locals: { topic: @topic, post: @post, comment: c } %&gt;
-    -->
-    <!--
-        Checkpoint #46 - Comments
-        
-        Bonus: Rails has a terse syntax for rendering partials with a collection
-        of objects. Once your each loop implementation is working, read section
-        3.4.5. Replace the each loop with a single call to render the
-        '@comments' collection. For more guidance, see the section on render
-        below.
-    --->
-    <!--
-    &lt;%= render partial: 'comment', collection: c %>
-&lt;% end %>
--->
-
 <h3>Comments:</h3>
-<%= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
+
+<!--
+    Assignment #46 - Comments
+    
+    If you try to create a comment without first signing in, you'll encounter a
+    no method 'id' for NilClass error. This error is thrown because current_user
+    is nil when you're not signed in, and comment creation attempts to extract
+    an id from this nil object.
+        - Use CommentPolicy in posts#show to hide the comment form unless a user
+          is signed in.
+-->
+<% if @post.user.present? %>
+    <%= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
+<% end %>
 <%= render partial: 'comments/comment', collection: @comments %>
