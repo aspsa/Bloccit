@@ -72,6 +72,17 @@
         <% if policy(@post).edit? %>
             <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
         <% end %>
+    
+        <!--
+            Checkpoint #51 - Destroy
+            
+            Modify 'posts#show' to add a 'link_t' for deletion.
+            
+            Notice that we must supply an array of instance variables ([@topic, @post]) to the 'link_to' method because posts are nested under topics.
+        -->
+        <% if policy(@post).destroy? %>
+            <%= link_to "Delete Post", [@topic, @post], method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure you want to delete this post?" } %>
+        <% end %>
     </div>
 </div>
 

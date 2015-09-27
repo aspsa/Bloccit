@@ -84,6 +84,32 @@ class TopicsController < ApplicationController
     end
   end
   
+  # Checkpoint #51 - Destroy
+  #
+  # You know that destroy is a CRUD action, so that should give you a clue on where to start coding. CRUD actions are written in controllers, so let's start by writing a destroy action in TopicsController.
+  #
+  # Note that we don't have to make any changes to routes.rb, because resources :topics sets up the routes for all CRUD actions for us.
+  #
+  # Before reading our code, see if you can write the action on your own. It should:
+  #   - Find the topic by id.
+  #   - Call authorize to make sure the topic can be destroyed by the current
+  #     user.
+  #   - Call destroy on the topic, and handle both success and failure with
+  #     useful "flash messages".
+  def destroy
+    @topic = Topic.find(params[:id])
+    
+    authorize @topic
+    
+    if @topic.destroy
+      flash[:notice] = "\"#{@topic.name}\"   was deleted successfully."
+      redirect_to topics_path
+    else
+      flash[:error] = "There was an error deleting this topic."
+      render :show
+    end
+  end
+  
   # Assignment #41 - Interlude
   #
   # Let's clean up TopicsController in the same way we refactored PostsController.

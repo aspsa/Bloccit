@@ -78,7 +78,14 @@ Rails.application.routes.draw do
     # suggests, this "deep nesting" can get complicated, and we should refactor
     # it.
     resources :posts, except: [:index] do
-      resources :comments, only: [:create]
+      # Checkpoint #51 - Destroy
+      #
+      # Go back to localhost and try to delete a comment. Did you receive an error? (You should have!) If so, try to troubleshoot it on your own before reading on.
+      #
+      # The error was raised because you have not created a proper route for destroying comments. Open 'routes.rb' and modify the 'resources :comments' declaration to include 'destroy'.
+      #
+      # resources :comments, only: [:create]
+      resources :comments, only: [:create, :destroy]
     end
   end
   

@@ -15,4 +15,11 @@ class CommentPolicy < ApplicationPolicy
     def create?
         user.present?
     end
+    
+    # Checkpoint #51 - Destroy
+    #
+    # Create a 'CommentPolicy' class with a 'destroy?'' action
+    def destroy?
+       user.present? && (record.user == user || user.admin? || user.moderator?) 
+    end
 end

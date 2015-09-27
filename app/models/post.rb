@@ -3,7 +3,13 @@
 # Update 'post.rb' and 'topic.rb' to reflect the
 # 'topic_id' association.
 class Post < ActiveRecord::Base
-    has_many :comments
+    # Checkpoint #51 - Destroy
+    #
+    # Just like with topics, think about the implications of deleting a post. You know that comments belong to to posts, so let's modify post.rb to handle this
+    # Note that because comments are dependent on posts and posts are dependent on topics, if you delete a topic, it will remove its associated posts and those posts' associated comments.
+    #
+    # has_many :comments
+    has_many :comments, dependent: :destroy
     belongs_to :user
     
     # Checkpoint #40 - Topics and Posts

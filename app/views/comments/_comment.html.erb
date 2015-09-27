@@ -11,8 +11,30 @@
           comment, we need to call it multiple times, rendering a partial for
           each comment in @comments. This is a good candidate for an each loop.
 -->
+<!--
+    Checkpoint #51 - Destroy
+    
+    Finally, we also have to modify the comment-listing view -- the 'app/views/comments/_comment.html.erb' partial called in 'posts#show'.
+    
+    Note that in this partial we refer to '@topic' and '@post', but 'comment'. This is because the instance variables are available across view partials, and we don't need to pass them. We're not accessing the '@comment' instance variable, but rather the specific 'comment' over which we're looping, which is a local variable we need to pass in.
+
 <div class="row">
     <div class="col-md-8">
-        <p><%= markdown_to_html comment.body %></p>
+        <p>%= markdown_to_html comment.body %></p>
+    </div>
+</div>
+-->
+<div class="media">
+    <div class="media-left">
+        <%= image_tag(comment.user.avatar.small.url, class: 'media-object') if comment.user.avatar? %>
+    </div>
+    <div class="media-body">
+        <small>
+            <%= comment.user.name %> commented <%= time_ago_in_words(comment.created_at) %> ago
+            <% if policy(comment).destroy? %>
+                | <%= link_to "Delete", [@topic, @post, comment], method: :delete %>
+            <% end %>
+        </small>
+        <p><%= comment.body %></p>
     </div>
 </div>
