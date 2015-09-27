@@ -11,8 +11,18 @@ class CommentsController < ApplicationController
     #
     # Fill in the 'create' action. It should create a new comment associated
     # with a 'post' and the 'current_user' who created it.
-    @topic = Topic.find(params[:topic_id])
-    @post = @topic.posts.find(params[:post_id])
+    #
+    # Assignment #51 - Destroy
+    #
+    # Note the 'only: []'' in the top-level post resources line. This is because we don't want to create any '/posts/:id' routes, just 'posts/:post_id/comments'.
+    #
+    # Change the 'CommentsController' actions so that they no longer initialize '@topic'.
+    #
+    # Derive '@topic' from '@post' because we still want 'redirect_to' the '@post' page after creating or destroying a comment. Furthermore, '@post' is still nested under '@topic'.
+    #
+    # @topic = Topic.find(params[:topic_id])
+    # @post = @topic.posts.find(params[:post_id])
+    @post = Post.find(params[:post_id])
 
     @comment = @post.comments.new(comment_params)
     @comment.user = current_user
@@ -30,7 +40,16 @@ class CommentsController < ApplicationController
     # raise # This will short-circuit the method
     if @comment.save
       flash[:notice] = "Comment was saved."
-      redirect_to [@topic, @post]
+      # Assignment #51 - Destroy
+      #
+      # Note the 'only: []'' in the top-level post resources line. This is because we don't want to create any '/posts/:id' routes, just 'posts/:post_id/comments'.
+      #
+      # Change the 'CommentsController' actions so that they no longer initialize '@topic'.
+      #
+      # Derive '@topic' from '@post' because we still want 'redirect_to' the '@post' page after creating or destroying a comment. Furthermore, '@post' is still nested under '@topic'.
+      #
+      #redirect_to [@topic, @post]
+      redirect_to [@post, @comment]
     else
       flash[:error] = "There was an error saving the comment. Please try again."
       render :new
@@ -41,15 +60,38 @@ class CommentsController < ApplicationController
   #
   # Open 'comments_controller.rb' and add the 'destroy' method below
   def destroy
-    @topic = Topic.find(params[:topic_id])
-    @post = @topic.posts.find(params[:post_id])
+    # Checkpoint #46 - Comments
+    #
+    # Fill in the 'create' action. It should create a new comment associated
+    # with a 'post' and the 'current_user' who created it.
+    #
+    # Assignment #51 - Destroy
+    #
+    # Note the 'only: []'' in the top-level post resources line. This is because we don't want to create any '/posts/:id' routes, just 'posts/:post_id/comments'.
+    #
+    # Change the 'CommentsController' actions so that they no longer initialize '@topic'.
+    #
+    # Derive '@topic' from '@post' because we still want 'redirect_to' the '@post' page after creating or destroying a comment. Furthermore, '@post' is still nested under '@topic'.
+    #
+    # @topic = Topic.find(params[:topic_id])
+    # @post = @topic.posts.find(params[:post_id])
+    @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     
     authorize @comment
     
     if @comment.destroy
       flash[:notice] = "Comment was removed."
-      redirect_to [@topic, @post]
+      # Assignment #51 - Destroy
+      #
+      # Note the 'only: []'' in the top-level post resources line. This is because we don't want to create any '/posts/:id' routes, just 'posts/:post_id/comments'.
+      #
+      # Change the 'CommentsController' actions so that they no longer initialize '@topic'.
+      #
+      # Derive '@topic' from '@post' because we still want 'redirect_to' the '@post' page after creating or destroying a comment. Furthermore, '@post' is still nested under '@topic'.
+      #
+      #redirect_to [@topic, @post]
+      redirect_to [@post, @comment]
     else
       flash[:error] = "Comment couldn't be deleted. Try again."
       redirect_to [@topic, @post]

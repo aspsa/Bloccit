@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   # By calling 'resources :posts' in the 'resources :topics' block, you are
   # instructing Rails to create nested routes. Review your new routes by
   # running 'rake routes | grep post'.
-  resources :topics do
+  # resources :topics do
     # resources :posts, except: [:index]
     #
     # Checkpoint #46 - Comments
@@ -77,7 +77,7 @@ Rails.application.routes.draw do
     # as well. As the 'create' url, '/topics/:topic_id/posts/:post_id/comments',
     # suggests, this "deep nesting" can get complicated, and we should refactor
     # it.
-    resources :posts, except: [:index] do
+    # resources :posts, except: [:index] do
       # Checkpoint #51 - Destroy
       #
       # Go back to localhost and try to delete a comment. Did you receive an error? (You should have!) If so, try to troubleshoot it on your own before reading on.
@@ -85,9 +85,32 @@ Rails.application.routes.draw do
       # The error was raised because you have not created a proper route for destroying comments. Open 'routes.rb' and modify the 'resources :comments' declaration to include 'destroy'.
       #
       # resources :comments, only: [:create]
+      #resources :comments, only: [:create, :destroy]
+    # end
+    
+    # Assignment #51 - Destroy
+    #
+    # As the Rails Guide to Routing makes clear, deep route nesting can "quickly become cumbersome". It is cumbersome in a number of ways:
+    #
+    # - In 'CommentsController' we separately initialize '@topic', '@post' and '@comment'. We do so because the IDs are in the params hash. However, this is unnecessary because we can find the topic and post from the comment. Furthermore, what would happen if we navigated to '/topics/:topic_id/posts/:id' where the post does not belong to the topic? What would happen if we deleted one of the post's comments?
+    #
+    # - Our routing is cumbersome. In order to route to a comment, we have to know and reference its parent post and topic.
+    #
+    # - We nested our routes too deeply. As a result, our path helpers are confusing. Before, we just had post_path, but now we have '[@topic, @post, comment]'', or its unintuitive route, 'topic_post_comment_path'.
+    #
+    # To solve these issues, implement "shallow nesting".
+    #
+    # Change your routes file to reflect only the primary relationships.
+    #
+    # Note the 'only: []'' in the top-level post resources line. This is because we don't want to create any '/posts/:id' routes, just 'posts/:post_id/comments'.
+  # end
+    resources :topics do
+      resources :posts, except: [:index]
+    end
+    
+    resources :posts, only: [] do
       resources :comments, only: [:create, :destroy]
     end
-  end
   
 
   # Checkpoint #33 - CRUD
