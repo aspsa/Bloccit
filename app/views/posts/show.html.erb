@@ -100,7 +100,12 @@
 
     Dalibor's comment:
         - Use &lt;% if policy(@comment).new? %>
+
+% if @post.user.present? %>
+    %= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
+% end %>
 -->
-<% if @post.user.present? %>
+
+<% if policy(@comment).new? %>
     <%= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
 <% end %>

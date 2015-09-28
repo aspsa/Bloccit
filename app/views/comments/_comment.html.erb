@@ -48,11 +48,11 @@
                     Assignent #51 - Destroy
                     
                     Dalibor's comment:
-                        - &lt;%= link_to "Delete", [comment.post, comment], method: :delete, remote: true %>
+                        - &lt;%= link_to "Delete", [comment.post, comment], method: :delete %>
                         
                 | %= link_to "Delete", [@post, comment], method: :delete %>
                 -->
-                <%= link_to "Delete", [comment.post, comment], method: :delete, remote: true %>
+                <%= link_to "Delete", [comment.post, comment], method: :delete %>
             <% end %>
         </small>
         <p><%= comment.body %></p>
