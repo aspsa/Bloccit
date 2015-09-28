@@ -97,8 +97,10 @@
     an id from this nil object.
         - Use CommentPolicy in posts#show to hide the comment form unless a user
           is signed in.
+
+    Dalibor's comment:
+        - Use &lt;% if policy(@comment).new? %>
 -->
 <% if @post.user.present? %>
     <%= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
 <% end %>
-<%= render partial: 'comments/comment', collection: @comments %>
