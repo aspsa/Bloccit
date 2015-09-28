@@ -9,7 +9,13 @@
 #     able to be created if a user is present.
 class CommentPolicy < ApplicationPolicy
     def new?
-       true 
+       # Assignment #46 - Comments
+       #
+       # Dalibor's comment:
+       #    - You should not show new to not logged in user as well.
+       #
+       # true 
+       create?
     end
     
     def create?
