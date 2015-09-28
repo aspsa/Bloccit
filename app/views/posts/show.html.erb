@@ -96,5 +96,12 @@
             %= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
         % end %>
     -->
-<%= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
+    <!--
+        Dalibor's comment:
+            - Use &lt;% if policy(@comment).new? %> instead of &lt;% @post.user.present? %>
+    -->
+<% if policy(@comment).new? %>
+    <%= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
+<% end %>
+
 <%= render partial: 'comments/comment', collection: @comments %>
