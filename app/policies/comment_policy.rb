@@ -9,7 +9,7 @@
 #     able to be created if a user is present.
 class CommentPolicy < ApplicationPolicy
     def new?
-       true 
+       create?
     end
     
     def create?

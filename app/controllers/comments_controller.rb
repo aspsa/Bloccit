@@ -49,7 +49,14 @@ class CommentsController < ApplicationController
       # Derive '@topic' from '@post' because we still want 'redirect_to' the '@post' page after creating or destroying a comment. Furthermore, '@post' is still nested under '@topic'.
       #
       #redirect_to [@topic, @post]
-      redirect_to [@post, @comment]
+      
+      # Assignment #51 - Destroy
+      #
+      # Dalibor's comment:
+      #   - redirect_to [@post.topic, @post]
+      #
+      # redirect_to [@post, @comment]
+      redirect_to [@post.topic, @post]
     else
       flash[:error] = "There was an error saving the comment. Please try again."
       render :new
@@ -91,7 +98,14 @@ class CommentsController < ApplicationController
       # Derive '@topic' from '@post' because we still want 'redirect_to' the '@post' page after creating or destroying a comment. Furthermore, '@post' is still nested under '@topic'.
       #
       #redirect_to [@topic, @post]
-      redirect_to [@post, @comment]
+      
+      # Assignment #51 - Destroy
+      #
+      # Dalibor's comment:
+      #   - redirect_to [@post.topic, @post]
+      #
+      # redirect_to [@post, @comment]
+      redirect_to [@post.topic, @post]
     else
       flash[:error] = "Comment couldn't be deleted. Try again."
       redirect_to [@topic, @post]

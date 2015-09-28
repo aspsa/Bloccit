@@ -43,7 +43,16 @@
                 
                 | %= link_to "Delete", [@topic, @post, comment], method: :delete %>
                 -->
-                | <%= link_to "Delete", [@post, comment], method: :delete %>
+                
+                <!--
+                    Assignent #51 - Destroy
+                    
+                    Dalibor's comment:
+                        - &lt;%= link_to "Delete", [comment.post, comment], method: :delete, remote: true %>
+                        
+                | %= link_to "Delete", [@post, comment], method: :delete %>
+                -->
+                <%= link_to "Delete", [comment.post, comment], method: :delete, remote: true %>
             <% end %>
         </small>
         <p><%= comment.body %></p>
