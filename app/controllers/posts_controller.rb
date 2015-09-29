@@ -121,8 +121,8 @@ class PostsController < ApplicationController
   def new
     # Checkpoint #40 - Topics and Posts
     @topic = Topic.find(params[:topic_id])
-    
     @post = Post.new
+    @comment = @post.comments
     
     # Checkpoint #39 - Authorization
     #

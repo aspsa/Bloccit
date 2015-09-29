@@ -14,7 +14,19 @@
     controller" [Source:
     http://guides.rubyonrails.org/layouts_and_rendering.html#rendering-an-action-s-template-from-another-controller.
 -->
-<%= form_for [topic, post, comment] do |f| %>
+
+<!--
+    Assignment #51 - Destroy
+    
+    Note the 'only: []' in the top-level post resources line. This is because we don't want to create any '/posts/:id' routes, just 'posts/:post_id/comments'.
+    
+    Run 'rake routes' to see how this changes routing. Then make the following changes to refactor with these new, shallower routes:
+
+    Changge the comment paths, in both the 'comments/_comment.html.erb' and the 'comments/_form.html.erb' partials.
+
+%= form_for [topic, post, comment] do |f| %>
+-->
+<%= form_for [post, comment] do |f| %>
     <% if comment.errors.any? %>
         <div class="alert alert-danger">
             <h4>There are <%= pluralize(comment.errors.count, "error") %>.</h4>

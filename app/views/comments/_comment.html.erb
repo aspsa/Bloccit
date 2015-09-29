@@ -32,7 +32,27 @@
         <small>
             <%= comment.user.name %> commented <%= time_ago_in_words(comment.created_at) %> ago
             <% if policy(comment).destroy? %>
-                | <%= link_to "Delete", [@topic, @post, comment], method: :delete %>
+                <!--
+                    Assignment #51 - Destroy
+                    
+                    Note the 'only: []' in the top-level post resources line. This is because we don't want to create any '/posts/:id' routes, just 'posts/:post_id/comments'.
+                    
+                    Run 'rake routes' to see how this changes routing. Then make the following changes to refactor with these new, shallower routes:
+
+                    Changge the comment paths, in both the 'comments/_comment.html.erb' and the 'comments/_form.html.erb' partials.
+                
+                | %= link_to "Delete", [@topic, @post, comment], method: :delete %>
+                -->
+                
+                <!--
+                    Assignent #51 - Destroy
+                    
+                    Dalibor's comment:
+                        - &lt;%= link_to "Delete", [comment.post, comment], method: :delete %>
+                        
+                | %= link_to "Delete", [@post, comment], method: :delete %>
+                -->
+                <%= link_to "Delete", [comment.post, comment], method: :delete %>
             <% end %>
         </small>
         <p><%= comment.body %></p>
