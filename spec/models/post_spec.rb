@@ -3,8 +3,19 @@ require 'rails_helper'
 describe Post do
     describe "vote methods" do
        before do
-           @post = Post.create(title: 'post title', body: 'post body')
-           3.times { @post.votes.create(value: 1) }
+           # Checkpoint #53 - Voting
+           #
+           # The three tests below fail, because the Post's 'body' attribute value is not a minimum of twenty characters long. This is not evident in the RSpec error message, which simply states "You cannot call crete unless the parent is saved." Tracing the error requires some digging. The following stament in the Post model provides the root cause of the RSpec error:
+           #
+           #        validates :body, length: { minimum: 20 }, presence: true
+           #
+           # @post = Post.create(title: 'post title', body: 'post body')
+           #
+           # Note: Checkpoint #53 - Voting implies that correcting the Post creation statement such that its 'body' attribute value passess the Post model's validation statement corrects this problem, although the RSpec validation test still fails for Votes.
+           #
+           #        "If you run the spec again, the validations for the
+           #        presence of user and topic will also fail."
+           @post = Post.create(title: 'post title', body: 'Post bodies must be pretty long.')
            2.times { @post.votes.create(value: -1) }
        end
        

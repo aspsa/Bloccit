@@ -13,7 +13,20 @@ class User < ActiveRecord::Base
   # Model changes:
   #   - Update the User model so you can call 'user.comments', and the 'Comment'
   #     model so you can call 'comment.user'.
-  has_many :comments
+  #
+  # Checkpoint #53 - Voting
+  #
+  # While the file is open, update 'user.rb' so that deleting a user record also destroys its associated posts and comments.
+  #
+  # has_many :comments
+  has_many :comments, dependent: :destroy
+  
+  # Checkpoint #53 - Voting
+  #
+  # Votes have a similar relationship with users. Modify 'user.rb' to call the votes method on a user instance. This relationship will also destroy a user's votes when that user is destroyed.
+  #
+  # While the file is open, update 'user.rb' so that deleting a user record also destroys its associated posts and comments.
+  has_many :votes, dependent: :destroy
   
   # Checkpoint #44 - Uploading Images
   #
