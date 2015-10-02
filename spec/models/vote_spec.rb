@@ -1,6 +1,13 @@
 # Assignment #52 - Intro to RSpec
 #
+# Dalibor's comment:
+#      - Vote specs are not OK, try to fix them. If you do not manage it on your own, we are going to fix them after we introduce Vote model.
+
+
+# Assignment #52 - Intro to RSpec
+#
 # Since the intent for Test-Driven Development is to keep the tests as low-level as possible, the idea is to remove any dependencies to other Models. I assume this is a best practice. I also assume that if one referenced another model (e.g., the 'Post' model), that this RSpec file would have to somehow import the 'Post' RSpec file. Since this dependency is not asserted, then I assume it is sufficient to only require 'rails_helper' for RSpec testing purposes.
+=begin
 require 'rails_helper'
 
 describe Vote do
@@ -21,4 +28,25 @@ describe "validations" do
            end
        end
     end
+end
+=end
+
+# Assignment #52 - Intro to RSpec
+#
+# Dalibor's comments:
+#      - You need to enter specific expectations in your tests. One of the possible solutions:
+
+describe Vote do
+  describe "validations" do
+    it "only allows -1 or 1 as values" do
+      up_vote = Vote.new(value: 1)
+      expect(up_vote.valid?).to be_true
+
+      down_vote = Vote.new(value: -1)
+      expect(down_vote.valid?).to be_true
+
+      invalid_vote = Vote.new(value: 2)
+      expect(invalid_vote.valid?).to be_false
+    end
+  end
 end
