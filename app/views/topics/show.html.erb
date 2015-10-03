@@ -17,6 +17,14 @@
         <p class="lead"><%= @topic.description %></p>
         <% @posts.each do |post| %>
             <div class="media">
+                <!--
+                    Checkpoint #53 - Voting
+                    
+                    The 'app/views/topics/show.html.erb' view should render the voter partial as well. Users may appreciate being able to vote on posts without drilling all the way to the actual post view. Open 'app/views/topics/show.html.erb' and add the render call.
+                    
+                    Because our voter partial is DRY and modular, no other change is needed. Check out this new view in localhost.
+                -->
+               <%= render partial: 'votes/voter', locals: { post: post } %>
                 <div class="media-body">
                     <h4 class="media-heading">
                         <!--

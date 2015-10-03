@@ -1,0 +1,35 @@
+<!--
+    Checkpoint #53 - Voting
+    
+    We'll keep the UI for voting simple and use Reddit-like up/down arrows, with a score shown between the arrows. To build this, you'll need three separate divs - one for each arrow and one for the score. You should also surround the three divs with an outer div that groups the three elements together. Voting feels sufficiently distinct and repeatable to merit a separate partial, in which to store the modular view elements for a voter user interface. Create the following partial file.
+    
+    Because we haven't yet determined those links' locations, we'll just stub the path in the link_to method.
+    
+    A pound sign in quotes -- '#' or "#" -- is the conventional path for a pending link.
+    
+    Add this new class (i.e., 'vote-arrows' CSS class) to the outermost div in the voter partial, alongside 'pull-left'.
+    
+    Once we have our VoterPolicy, we can implement the authorization in the '_voter' partial.
+-->
+<% if policy(Vote.new).create? %>
+    <div class: 'pull-left vote-arrows'>
+        <!--
+            Checkpoint #53 - Voting
+            
+            Now that you have valid routes, you can update the link_to methods in the voter partial.
+        
+        <div>%= link_to " ", '#', class: 'glyphicon glyphicon-chevron-up' %></div>
+        <div><strong>%= post.points %></strong></div>
+        <div>
+            %= link_to " ", '#', class: 'glyphicon glyphicon-chevron-down' %>
+        </div>
+        
+            Note that we had to declare 'method: :post', because 'link_to' generates 'GET' requests by default. You'll recognize this pattern from the checkpoint on destroying objects.
+        -->
+        <div><%= link_to " ", post_up_vote_path(post), class: 'glyphicon glyphicon-chevron-up', method: :post %></div>
+        <div><strong><%= post.points %></strong></div>
+        <div>
+            <%= link_to " ", post_down_vote_path(post), class: 'glyphicon glyphicon-chevron-down', method: :post %>
+        </div>
+    </div>
+<% end %>

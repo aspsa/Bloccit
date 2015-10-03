@@ -23,7 +23,12 @@ class Post < ActiveRecord::Base
     belongs_to :topic
     
     # Checkpoint #38 - Associations
-    default_scope { order('created_at DESC') }
+    #default_scope { order('created_at DESC') }
+    #
+    # Checkpoint #53 - Voting
+    #
+    # Now that we have a rank that's determined by an algorithm, we'll employ it in the default_scope, so that posts are ordered by rank by default. Since we want the largest rank numbers displayed first, we'll use descending (DESC) order. Update the current default_scope declaration with 'rank DESC'
+    default_scope { order('rank DESC') }
     
     # Checkpoint #42 - Validating Posts
     #
@@ -48,4 +53,35 @@ class Post < ActiveRecord::Base
     #
     # validates :topic, presence: true
     # validates :user, presence: true
+    #
+    # Add the following 'up_votes' method to your post.rb file.
+    # Remember 'votes' in this code is an implied 'self.votes'.
+    #
+    # Before continuing, add a similar 'down_votes' method to 'post.rb', and a 'points' method, which uses ActiveRecord's 'sum' method to add up the value of all the given post's votes.
+    # You can pass a symbol of an attribute to sum, to tell it what to sum in the collection.
+    def up_votes
+        votes.where(value: 1).count
+    end
+    
+    def down_votes
+        votes.where(value: -1).count
+    end
+    
+    def points
+       votes.sum(:value) 
+    end
+    
+    # Checkpoint #53 - Voting
+    #
+    # The 'after_save' method will run update_post every time a vote is saved. The 'update_post' method calls a method named 'update_rank' on a vote's post object. We haven't created 'update_rank' yet, so 'open post.rb' and do that now.
+    #
+    # Note the two uses of implied 'self' -- 'created_at' and 'update_attribute'.
+    #
+    # People have very different takes on ranking algorithms. Some are very complex and some are very simple. The Bloccit algorithm is an attempt at a simple yet useful ranking tool. Since you created the rank attribute as a float, you'll have the flexibility needed to tinker with it. Try searching for the ranking algorithms that Hacker News or Reddit use.
+    def update_rank
+       age_in_days = (created_at - Time.new(1970,1,1)) / (60 * 60 * 24) # 1 day in seconds
+       new_rank = points + age_in_days
+       
+       update_attribute(:rank, new_rank)
+    end
 end

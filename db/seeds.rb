@@ -49,7 +49,13 @@ topics = Topic.all
 
 # Create Posts
 50.times do
-    Post.create!(
+    # Checkpoint #53 - Voting
+    #
+    # Since we updated the posts table with a rank attribute, we should make sure it's properly seeded when we reset the database. Open 'seeds.rb' and add 'post.update_rank' to the section where we create posts.
+    #
+    #Post.create!(
+    #
+    post = Post.create!(
         # Checkpoint #38 - Associations
         user: users.sample,
         
@@ -62,6 +68,12 @@ topics = Topic.all
         title: Faker::Lorem.sentence,
         body: Faker::Lorem.paragraph
     )
+    
+    # Checkpoint #53 - Voting
+    #
+    # Set the 'create_at' to a time within the past year.
+    post.update_attributes!(created_at: rand(10.minutes .. 1.year).ago)
+    post.update_rank
 end
 
 posts = Post.all

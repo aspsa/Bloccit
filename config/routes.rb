@@ -110,8 +110,16 @@ Rails.application.routes.draw do
     
     resources :posts, only: [] do
       resources :comments, only: [:create, :destroy]
+      
+      # Checkpoint #53 - Voting
+      #
+      # In the voter partial, we stubbed out the destination URL in the link_to methods, but obviously we'll need to update this so the vote links actually do something. Votes are different than topics or posts, because they do not need a complete RESTful resource. In other words, there are no forms or specific views for votes, only the links in the voter partial. This means that our best option is to create a couple of routes manually in 'routes.rb'.
+      #
+      # These lines set up POST routes at the URL 'posts/:id/up-vote' and 'posts/:id/down-vote'. The as key-value pairs at the end stipulate the method names which will be associated with these routes: 'up_vote_path' and 'down_vote_path'.
+      post 'up/vote' => 'votes#up_vote', as: :up_vote
+      post 'down/vote' => 'votes#down_vote', as: :down_vote
     end
-  
+    
 
   # Checkpoint #33 - CRUD
   #

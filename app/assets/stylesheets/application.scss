@@ -30,3 +30,13 @@
 .nav {
     margin-top: 5px;
 }
+
+/*
+    Checkpoint #53 - Voting
+    
+    We can polish the formatting using custom CSS. Open 'app/assets/stylesheets/application.scss' and add the following class.
+*/
+.vote-arrows {
+    width: 40px;
+    text-align: center;
+}

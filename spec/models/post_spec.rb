@@ -16,6 +16,7 @@ describe Post do
            #        "If you run the spec again, the validations for the
            #        presence of user and topic will also fail."
            @post = Post.create(title: 'post title', body: 'Post bodies must be pretty long.')
+           3.times { @post.votes.create(value: 1) }
            2.times { @post.votes.create(value: -1) }
        end
        
