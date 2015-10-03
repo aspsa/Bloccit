@@ -101,7 +101,10 @@ class Post < ActiveRecord::Base
     # In create_vote, use 'user.votes.create', and set the post association to equal 'self', and the value to equal '1'.
     #
     # If you get stuck, refer to the pattern of our 'after_save' method in 'vote.rb'.
+    
+    private
+    
     def create_vote
-        update_rank
+        user.votes.create(value: 1, post: self)
     end
 end
