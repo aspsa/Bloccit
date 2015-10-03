@@ -6,4 +6,9 @@
 class Vote < ActiveRecord::Base
   belongs_to :user
   belongs_to :post
+  
+  # Checkpoint #53 - Voting
+  #
+  # To get this test passing (and our functionality working as expected), add the following validation in 'vote.rb'.
+  validates :value, inclusion: { in: [-1, 1], message: "%{value} is not a valid vote." }
 end
