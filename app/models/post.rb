@@ -84,4 +84,24 @@ class Post < ActiveRecord::Base
        
        update_attribute(:rank, new_rank)
     end
+    
+    # Assignment #53 - Voting
+    #
+    # It's safe to assume that if a user submits a post, they'll want to vote it up.
+    #
+    # Implement an 'after_create' method for Post. This method will create a new vote for the post on which it's called, associated with both the post and the user who created it.
+    #
+    # Call the 'after_create' method 'create_vote' and make it private.
+    after_create :create_vote
+    
+    # Assignment #53 - Voting
+    #
+    # It's safe to assume that if a user submits a post, they'll want to vote it up.
+    #
+    # In create_vote, use 'user.votes.create', and set the post association to equal 'self', and the value to equal '1'.
+    #
+    # If you get stuck, refer to the pattern of our 'after_save' method in 'vote.rb'.
+    def create_vote
+        update_rank
+    end
 end

@@ -10,7 +10,7 @@
 #
 # Because we need to authorize an actual Vote object before it is saved to a database, the else section of the method has been expanded. Instead of a single call to create, the Vote object is first initialized with 'build', then authorized, and finally stored in a database using 'save'.
 class VotesController < ApplicationController
-        before_action :load_and_post_vote
+    before_action :load_and_post_vote
     
     def up_vote
         #@post = Post.find(params[:post_id]) 
