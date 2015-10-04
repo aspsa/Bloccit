@@ -106,6 +106,11 @@ class PostsController < ApplicationController
     # Checkpoint #35 - More CRUD
     # raise # This will short-circuit the method
     if @post.save
+      # Checkpoint #54 - Mocking with RSpec
+      #
+      # Anywhere we create a post, we must also call create_vote on it. Some simple text searching for Post.create and post.save returns two relevant results outside of our specs, the posts_controller and our seeds file.
+      @post.create_vote
+      
       flash[:notice] = "Post was saved."
       
       # Checkpoint #40 - Topics and Posts

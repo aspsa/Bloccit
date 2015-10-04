@@ -80,4 +80,26 @@ describe Vote do
       expect(invalid_vote).to be_invalid
     end
   end
+  
+  # Checkpoint #54 - Mocking with RSpec
+  #
+  # Let's use doubles to test our new post ranking system. As you recall, when a vote is saved, an after_save method, update_post, is called, and that method calls post.update_rank.
+  #
+  # Remember two of our testing principles, "respect object limits", and "test what, not how". We'll be following these principles closely in these tests. Specifically, in our vote_spec, we'll test that each vote sends a Post#update_rank "message" when saved, but not how that Post#update_rank method works, or how a vote is responsible for sending that message to its post.
+  #
+  # In other words, we're testing that the post receives the message, but not how it functions internally. If we want to test that functionality, we should do so in post_spec.rb.
+  #
+  # You'll note that we use the associated_post factory again. For now, just copy that method to the bottom of vote_spec.rb. We'll DRY things up soon.
+  describe 'after_save' do
+    it "calls 'Post#update_rank' after save" do
+      post = associated_post
+      vote = Vote.new(value: 1, post: post)
+      expect(post).to receive(:update_rank)
+      
+      # Checkpoint #54 - Mocking with RSpec
+      #
+      # Note that we trigger the behavior after we set the expectation. That's because this is a behavior test, not a results test. In order for the test to look for this behavior, we have to set our expectation before we make it occur.
+      vote.save
+    end
+  end
 end

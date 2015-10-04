@@ -59,6 +59,15 @@ class Post < ActiveRecord::Base
     #
     # Before continuing, add a similar 'down_votes' method to 'post.rb', and a 'points' method, which uses ActiveRecord's 'sum' method to add up the value of all the given post's votes.
     # You can pass a symbol of an attribute to sum, to tell it what to sum in the collection.
+    
+    # Checkpoint #54 - Mocking with RSpec
+    #
+    # The specs pass, but we've forgotten something. To get the specs to pass, we removed our validations for the presence of a topic and user for every post. Add those validations back.
+    #
+    # Run the specs again. They will fail, because our post won't save without a user and a topic. Our stub avoided the superficial "implementation" detail, and so skipped the fundamental problem. Let's try to solve these test errors using factories instead. In RSpec, a factory is a tool for generating particular types of objects for tests. There are great tools for test factories, such as the FactoryGirl gem, which we'll introduce later. For now, we'll build our own.
+    validates :topic, presence: true
+    validates :user, presence: true
+    
     def up_votes
         votes.where(value: 1).count
     end
@@ -92,7 +101,14 @@ class Post < ActiveRecord::Base
     # Implement an 'after_create' method for Post. This method will create a new vote for the post on which it's called, associated with both the post and the user who created it.
     #
     # Call the 'after_create' method 'create_vote' and make it private.
-    after_create :create_vote
+    #
+    # Checkpoint #54 - Mocking with RSpec
+    #
+    # Instead of calling create_vote as an after-create, which "implicitly" turns Post.create into Post.create_with_vote, explicitly call create_vote after saving a post in our app.
+    #
+    # The first step is to remove the call to after_create, and move create_vote out of private, so we can call it directly.
+    #
+    #after_create :create_vote
     
     # Assignment #53 - Voting
     #
@@ -102,7 +118,13 @@ class Post < ActiveRecord::Base
     #
     # If you get stuck, refer to the pattern of our 'after_save' method in 'vote.rb'.
     
-    private
+    # Checkpoint #54 - Mocking with RSpec
+    #
+    # Instead of calling create_vote as an after-create, which "implicitly" turns Post.create into Post.create_with_vote, explicitly call create_vote after saving a post in our app.
+    #
+    # The first step is to remove the call to after_create, and move create_vote out of private, so we can call it directly.
+    #
+    #private
     
     def create_vote
         user.votes.create(value: 1, post: self)

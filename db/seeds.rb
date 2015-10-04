@@ -73,6 +73,12 @@ topics = Topic.all
     #
     # Set the 'create_at' to a time within the past year.
     post.update_attributes!(created_at: rand(10.minutes .. 1.year).ago)
+    
+    # Checkpoint #54 - Mocking with RSpec
+    #
+    # Anywhere we create a post, we must also call create_vote on it. Some simple text searching for Post.create and post.save returns two relevant results outside of our specs, the posts_controller and our seeds file.
+    @post.create_vote
+
     post.update_rank
 end
 
