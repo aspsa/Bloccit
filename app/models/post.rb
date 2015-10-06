@@ -129,4 +129,18 @@ class Post < ActiveRecord::Base
     def create_vote
         user.votes.create(value: 1, post: self)
     end
+    
+    # Assignment #54 - Mocking with RSpec
+    #
+    # Using ActiveRecord::Base.transaction, open up a separate branch and refactor our code as follows:
+    #
+    #   - Add a save_with_initial_vote method to Post. This method should both
+    #     save the post and create its vote inside a transaction, so that if the
+    #     latter fails, the former doesn't occur.
+    #   - Use this method in the PostsController instead of explicitly calling
+    #     both save and create_vote.
+    def save_with_initial_vote
+        self.save
+        self.create_vote
+    end
 end

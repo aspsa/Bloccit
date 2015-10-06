@@ -105,21 +105,36 @@ class PostsController < ApplicationController
     
     # Checkpoint #35 - More CRUD
     # raise # This will short-circuit the method
-    if @post.save
+    #
+    # Assignment #54 - Mocking with RSpec
+    #
+    # Using ActiveRecord::Base.transaction, open up a separate branch and refactor our code as follows:
+    #
+    #   - Add a save_with_initial_vote method to Post. This method should both
+    #     save the post and create its vote inside a transaction, so that if the
+    #     latter fails, the former doesn't occur.
+    #   - Use this method in the PostsController instead of explicitly calling
+    #     both save and create_vote.
+    #
+    #if @post.save
       # Checkpoint #54 - Mocking with RSpec
       #
       # Anywhere we create a post, we must also call create_vote on it. Some simple text searching for Post.create and post.save returns two relevant results outside of our specs, the posts_controller and our seeds file.
-      @post.create_vote
+    # @post.create_vote
       
-      flash[:notice] = "Post was saved."
+    # flash[:notice] = "Post was saved."
       
       # Checkpoint #40 - Topics and Posts
       #
       # redirect_to @post
-      redirect_to [@topic, @post]
-    else
-      flash[:error] = "There was an error saving the post. Please try again."
-      render :new
+    # redirect_to [@topic, @post]
+    #else
+    # flash[:error] = "There was an error saving the post. Please try again."
+    # render :new
+    #end
+    #
+    ActiveRecord::Base.transaction do
+      @post.save_with_initial_vote
     end
   end
 
