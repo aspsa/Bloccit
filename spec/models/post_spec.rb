@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 describe Post do
+    # Checkoint #54 - Mocking with RSpec
+    #
+    # Remove the two factories from spec/models/post_spec.rb, and add them to this file (i.e., spec/support/test_factories.rb).
+    #
+    # Because we're removing the factories from post_spec.rb, we need to include the TestFactories module there as well. We should also replace our associated_post definition in vote_spec.rb. Follow the pattern of the votes_controller_spec above.
+    include TestFactories
+
     describe "vote methods" do
        before do
            # Checkpoint #53 - Voting
@@ -102,6 +109,13 @@ describe Post do
     # The keys to these methods are the merge method and the default hash arguments that allow the two factories to be called without arguments.
     #
     # With these changes, we should be able to use our factories to quickly generate associated objects with as much or as little detail-orientation as we need.
+    #
+    # Checkoint #54 - Mocking with RSpec
+    #
+    # Remove the two factories from spec/models/post_spec.rb, and add them to this file (i.e., spec/support/test_factories.rb).
+    #
+    # Because we're removing the factories from post_spec.rb, we need to include the TestFactories module there as well. We should also replace our associated_post definition in vote_spec.rb. Follow the pattern of the votes_controller_spec above.
+=begin
     def associated_post(options={})
        #user = authenticated_user
        #topic = Topic.create(name: 'Topic name')
@@ -115,6 +129,7 @@ describe Post do
        
        Post.create(post_options)
     end
+=end
 
     # Checkpoint #54 - Mocking with RSpec
     #
@@ -144,6 +159,13 @@ describe Post do
     # The keys to these methods are the merge method and the default hash arguments that allow the two factories to be called without arguments.
     #
     # With these changes, we should be able to use our factories to quickly generate associated objects with as much or as little detail-orientation as we need.
+    #
+    # Checkoint #54 - Mocking with RSpec
+    #
+    # Remove the two factories from spec/models/post_spec.rb, and add them to this file (i.e., spec/support/test_factories.rb).
+    #
+    # Because we're removing the factories from post_spec.rb, we need to include the TestFactories module there as well. We should also replace our associated_post definition in vote_spec.rb. Follow the pattern of the votes_controller_spec above.
+=begin   
     def authenticated_user(options={})
        #user = User.new(email: "email#{rand}@fake.com", password: 'password') 
        user_options = {email: "email#{rand}@fake.com", password: 'password'}.merge(options)
@@ -152,4 +174,5 @@ describe Post do
        user.save
        user
     end
+=end
 end

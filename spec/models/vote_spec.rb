@@ -44,6 +44,13 @@ end
 require 'rails_helper'
 
 describe Vote do
+  # Checkoint #54 - Mocking with RSpec
+  #
+  # Remove the two factories from spec/models/post_spec.rb, and add them to this file (i.e., spec/support/test_factories.rb).
+  #
+  # Because we're removing the factories from post_spec.rb, we need to include the TestFactories module there as well. We should also replace our associated_post definition in vote_spec.rb. Follow the pattern of the votes_controller_spec above.
+  include TestFactories
+
   describe "validations" do
     it "only allows -1 or 1 as values" do
       up_vote = Vote.new(value: 1)
