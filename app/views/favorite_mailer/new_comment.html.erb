@@ -1,0 +1,26 @@
+<!--
+    Checkpoint #55 - Favoriting
+    
+    This view will not use the application.html.erb layout we defined for the other layouts in our app. In fact, you can't even reference external CSS in your mailer views, as most clients won't use it. We'll just create a basic HTML layout.
+    
+    Note that Rails conventions are doing some heavy lifting for us again. Because our view has the same name as our mailer method and is in the views/favorite_mailer directory, our mailer automatically assumes that file contains the HTML we want to render. (The view name 'new_comment.html.erb' is in sync with the 'application_mailer.rb' 'new_comment' method.)
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        
+    </head>
+    <body>
+        <h1>New comment to "<%= @post.title %>"</h1>
+        <small>
+            By: <%= @comment.user.name %>
+        </small>
+        <p>
+            <%= @comment.body %>
+        </p>
+        <p>
+            <%= link_to "View comment on site", topic_post_url(@post.topic, @post, anchor: "comment-#{@comment.id}") %>
+        </p>
+    </body>
+</html>

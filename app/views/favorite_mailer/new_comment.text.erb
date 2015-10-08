@@ -1,0 +1,18 @@
+<!--
+    Checkpoint #55 - Favoriting
+    
+    If a user's email client won't render HTML, we want to present them with plain text. So create new_comment.text.erb and add the following.
+-->
+New comment to "<%= @post.title %>"
+<%= "=" * (@post.title.length + 12) %>
+
+By: <%= @comment.user.name %>
+
+<%= @comment.body %>
+
+<!--
+    Checkpoint #55 - Favoriting
+    
+    Notice that we are using topic_post_url. This is very important. When we use _path we get a "relative URL", such as "topics/3". This works within the context of the website because the browser already knows the base URL. When a user sees this email, they won't be in the application and thus won't have the base URL. Therefore, we have to define it. That is what _url does. It generates an "absolute URL", such as "http://myapp.com/topics/3".
+-->
+Visit online at: <%= topic_post_url(@post.topic, @post, anchor: "comment-#{@comment.id}") %>

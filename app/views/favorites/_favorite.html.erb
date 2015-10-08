@@ -1,0 +1,42 @@
+<!--
+    Checkpoint #55 - Favoriting
+    
+    Create a _favorite.html.erb partial in the app/views/favorites/ directory and add the following code.
+-->
+
+<!--
+    Checkpoint #55 - Favoriting
+    
+    Add the proper authorization to the partial.
+-->
+<% if policy(Favorite.new).create? %>
+    <div class="favorite">
+        <% if favorite = current_user.favorited(post) %>
+            Favorited
+            
+            <!--
+                Checkpoint #55 - Favoriting
+            
+                Each "favorite" is a model instance, and in order to unfavorite a post, we need to delete the appropriate favorite instance from the database. We can do this with another link. Add the following to the _favorite.html.erb <partial class=""></partial>
+            -->
+            <%= link_to [post, favorite], class: 'btn btn-danger', method: :delete do %>
+                <i class="glyphicon glyphicon-star-emtpy"> </i>&nbsp; Unfavorite
+            <% end %>
+        <% else %>
+            Want to favorite this?
+            
+            <!--
+                Checkpoint #55 - Favoriting
+                
+                Let's add the ability to create a favorite.
+                
+                It usually isn't good practice to initialize a new model instance (Favorite.new) in the view, but we are making an exception here so we don't have to modify the posts_controller and posts#show view.
+                
+                While we're editing the link_to call, note how the link_to method can take a block argument of HTML to nest inside it.
+            -->
+            <%= link_to [post, Favorite.new], class: 'btn btn-primary', method: :post do %>
+                    <i class="glyphicon glyphicon-star"> </i>&nbsp; Favorite
+            <% end %>
+        <% end %>
+    </div>
+<% end %>

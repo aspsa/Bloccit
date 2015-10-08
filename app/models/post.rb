@@ -22,6 +22,11 @@ class Post < ActiveRecord::Base
     # Checkpoint #40 - Topics and Posts
     belongs_to :topic
     
+    # Checkpoint #55 - Favoriting
+    #
+    # Associate the Favorite model by adding has_many to the User and Post models. Remember that an instance of favorite cannot exist without an associated user or post, so add the dependent: :destroy option for both models.
+    has_many :favorites, dependent: :destroy
+    
     # Checkpoint #38 - Associations
     #default_scope { order('created_at DESC') }
     #

@@ -110,6 +110,13 @@
                 <%= pluralize(@post.down_votes, 'down vote') %>
             </small>
         </div>
+        
+        <!--
+            Checkpoint #55 - Favorited
+            
+            Let's render the '_favorite.html.erb' partial in the posts#show view.
+        -->
+        <%= render partial: 'favorites/favorite', locals: { post: @post } %>
     </div>
 </div>
 

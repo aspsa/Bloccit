@@ -110,6 +110,11 @@ Rails.application.routes.draw do
     
     resources :posts, only: [] do
       resources :comments, only: [:create, :destroy]
+
+      # Checkpoint #55 - Favoriting
+      #
+      # Notice we didn't specify any views - that is because this controller won't have any normal views. We'll define create and destroy actions, which aren't associated with GET requests, and so have no views. Add the required routes for create and destroy to routes.rb.
+      resources :favorites, only: [:create, :destroy]
       
       # Checkpoint #53 - Voting
       #
@@ -120,7 +125,6 @@ Rails.application.routes.draw do
       post 'down/vote' => 'votes#down_vote', as: :down_vote
     end
     
-
   # Checkpoint #33 - CRUD
   #
   # "Notice that we also removed the get 'welcome/index', because we've

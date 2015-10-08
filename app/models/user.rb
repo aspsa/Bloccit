@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
   # While the file is open, update 'user.rb' so that deleting a user record also destroys its associated posts and comments.
   has_many :votes, dependent: :destroy
   
+  # Checkpoint #55 - Favoriting
+  #
+  # Associate the Favorite model by adding has_many to the User and Post models. Remember that an instance of favorite cannot exist without an associated user or post, so add the dependent: :destroy option for both models.
+  has_many :favorites, dependent: :destroy
+  
   # Checkpoint #44 - Uploading Images
   #
   # CarrierWave provides a method named mount_uploader which gives an attribute
@@ -42,5 +47,14 @@ class User < ActiveRecord::Base
   
   def moderator?
     role == 'moderator'
+  end
+  
+  # Checkpoint #55 - Favoriting
+  #
+  # The UI implementation for favorites should be simple. Essentially, we'll want to display a link on the posts#show view so that the user can flag that post as a favorite. Conversely, we'll want to display a link for users to unfavorite a post as well.
+  #
+  # To toggle between favorite and un-favorite states, it will be helpful to have a favorited method which will let us know if a given user has favorited a post. Go to user.rb and create the method.
+  def favorited(post)
+    favorites.where(post_id: post.id).first
   end
 end

@@ -24,10 +24,22 @@
     </div>
 </div>
 -->
+
+<!--
+    Checkpoint #55 - Favoriting
+    
+    To make this anchor redirect where we want it (i.e., the anchor tag defined in 'views/favorite_mailer/new_comment.html.erb' and in 'views/favorite/mailer/new_comment.text.erb'), let's add a unique id to the _comment.html.erb partial of each comment using content_tag. The _comment partial should look like this.
+    
+    We use content_tag here to generate HTML, because our alternative, interpolating a comment's ID inside an HTML tag, is ugly and difficult to read: <div class="media" id="comment-&lt;%= comment.id %>">.
+
 <div class="media">
-    <div class="media-left">
+-->
+<%= content_tag :div, class: 'media', id: "comment-#{comment-id}" do %>
+    <!-- <div class="media-left"> -->
+    <%= link_to '#', class: 'pull-left' do %>
         <%= image_tag(comment.user.avatar.small.url, class: 'media-object') if comment.user.avatar? %>
-    </div>
+    <% end %>
+    <!-- </div> -->
     <div class="media-body">
         <small>
             <%= comment.user.name %> commented <%= time_ago_in_words(comment.created_at) %> ago
@@ -57,4 +69,5 @@
         </small>
         <p><%= comment.body %></p>
     </div>
-</div>
+<% end %>
+<!-- </div> -->
