@@ -29,7 +29,7 @@ require 'rspec/rails'
 # This line automatically requires all .rb files in the spec/support directory before running any specs. (Rails.root returns the path to your app's directory in the filesystem.) This means that if we put any Ruby files in that directory, they'll automatically be required in our tests.
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
-Read about Dir and File.join to get a better sense of how this works.
+#Read about Dir and File.join to get a better sense of how this works.
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

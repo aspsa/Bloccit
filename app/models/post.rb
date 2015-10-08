@@ -139,8 +139,26 @@ class Post < ActiveRecord::Base
     #     latter fails, the former doesn't occur.
     #   - Use this method in the PostsController instead of explicitly calling
     #     both save and create_vote.
+    #
+    # Assignment #54 - Mocking with RSPec
+    #
+    # Dalibor's comment:
+    #   - Add a save_with_initial_vote method to Post. This method should both
+    #     save the post and create its vote inside a transaction, so that if the
+    #     latter fails, the former doesn't occur.
+    #
+    #     Transaction should be inside this method.
+    #ActiveRecord::Base.transaction do
+    #  @post.save_with_initial_vote
+    #end
+    #def save_with_initial_vote
+    #    self.save
+    #    self.create_vote
+    #end
     def save_with_initial_vote
-        self.save
-        self.create_vote
+        ActiveRecord::Base.transaction do
+            self.save
+            self.create_vote
+        end
     end
 end
