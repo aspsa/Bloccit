@@ -38,5 +38,12 @@ class Topic < ActiveRecord::Base
     # Define publicly_viewable and privately_viewable scopes on Topic that return collections of public or private topics.
     #
     # Use the publicly_viewable scope inside of the visible_to scope to make your code more DRY.
-    scope :publicly_viewable, ->(user) { user ? all : where(public: true) }
+    #
+    # Dalibor's Comment:
+    #   - These scopes do not depend on user. Revise as follows:
+    #
+    #scope :publicly_viewable, ->(user) { user ? all : where(public: true) }
+    #scope :privately_viewable, ->(user) { user ? all : where(public: false) }
+    scope :publicly_viewable, -> { where(public: true) }
+    scope :privately_viewable, -> { where(public: false) }
 end
