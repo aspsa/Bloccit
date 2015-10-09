@@ -31,5 +31,5 @@ class Topic < ActiveRecord::Base
     # Notice the usage of the ternary operator to keep the lambda on one line. This is essentially a one-line if-else condition. It's useful, but often involves sacrificing clarity for brevity.
     #
     #scope :visible_to, -> { where(public: true) }
-    scope :visible_to, -> (user) { user ? all : where(public: true) }
+    scope :visible_to, ->(user) { user ? all : where(public: true) }
 end
