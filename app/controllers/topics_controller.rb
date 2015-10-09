@@ -21,7 +21,16 @@ class TopicsController < ApplicationController
     # per page, starting on page number params[:page].
     #
     # @topics = Topic.all
-    @topics = Topic.paginate(page: params[:page], per_page: 10)
+    #
+    # Checkpoint #56 - Private Topics
+    #
+    # For our scope to modify the list of topics a user can see, modify the index method in topics_controller.rb to return a scoped collection of topics, rather than a comprehensive collection.
+    #
+    # Notice how we can chain our visible_to scope like any other method. We are not only passing in the current_user, but we are also keeping the collection paginated. This is possible because the scope returns an Active Record relation.
+    #
+    #@topics = Topic.paginate(page: params[:page], per_page: 10)
+    @topics = Topic.visible_to(current_user).paginate(page: params[:page], per_page: 10)
+    
     authorize @topics
   end
 

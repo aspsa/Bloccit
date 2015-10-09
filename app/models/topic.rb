@@ -17,4 +17,19 @@ class Topic < ActiveRecord::Base
     #
     # has_many :posts
     has_many :posts, dependent: :destroy
+    
+    # Checkpoint #56 - Private Topics
+    #
+    # Scopes are additionally useful because they can be chained. Scopes are called on relations (Active Record collections), and return relations, so it's easy to select very precisely by simply chaining scopes. Active Record automatically combines all the conditions for you into one quick SQL query!
+    #
+    # This uses a lambda syntax (the arrow -> with a block) that is the proper way to pass a piece of code into a scope definition. This scope runs the code inside the lambda on the relation or class on which it's called. In other words, Topic.visible_to is equivalent to Topic.where(public: true).
+    #
+    # Checkpoint #56 - Private Topics
+    #
+    # This works, but it doesn't solve the problem of determining whether the topic is visible to a particular user. To do that using our scope as written, we would require an if statement in the topics_controller to determine if a user is signed-in. Instead, let's create a new scope the lambda of which takes an argument:
+    #
+    # Notice the usage of the ternary operator to keep the lambda on one line. This is essentially a one-line if-else condition. It's useful, but often involves sacrificing clarity for brevity.
+    #
+    #scope :visible_to, -> { where(public: true) }
+    scope :visible_to, -> (user) { user ? all : where(public: true) }
 end
