@@ -31,7 +31,7 @@ class Topic < ActiveRecord::Base
     # Notice the usage of the ternary operator to keep the lambda on one line. This is essentially a one-line if-else condition. It's useful, but often involves sacrificing clarity for brevity.
     #
     #scope :visible_to, -> { where(public: true) }
-    scope :visible_to, ->(user) { user ? all : where(public: true) }
+    #scope :visible_to, ->(user) { user ? all : where(public: true) }
     
     # Assignment #56 - Private Topics
     #
@@ -46,4 +46,17 @@ class Topic < ActiveRecord::Base
     #scope :privately_viewable, ->(user) { user ? all : where(public: false) }
     scope :publicly_viewable, -> { where(public: true) }
     scope :privately_viewable, -> { where(public: false) }
+    
+    # Assignment #56 - Private Topics
+    #
+    # Dalibor's comment:
+    #   - These scopes do not depend on user.
+    #       scope :publicly_viewable, -> { where(public: true) }
+    #       scope :privately_viewable, -> { where(public: false) }
+    #
+    #   - Apply DRY to this statement.
+    #       scope :visible_to, ->(user) { user ? all : where(public: true) }
+    #
+    # Do not hard-code in 'where(public: true)'. Instead, reuse the predefined ':pubblicly_viewable' symbol. This allows flexibility in redefining its scope and applying it consistently elsewhere.
+    scope :visible_to, ->(user) { user ? all : publicly_viewable }
 end
