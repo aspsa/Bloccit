@@ -102,6 +102,17 @@
         <%= f.hidden_field :avatar_cache %>
       </div>
       
+      <!--
+        Checkpoint #57 - Another Interlude
+        
+        We need to provide a way for users to toggle their email preference in their profile. Let's use a check-box for this on the users/edit view. Open app/views/devise/registrations/edit.html.erb and add the following inside the second form.
+      -->
+      <div class="form-group">
+        <%= f.label :email_favorites %>
+        <%= f.check_box :email_favorites %>
+        <p class="help-block">Be notified for new comments on your favorites</p>
+      </div>
+      
       <div class="form-group">
         <%= f.submit "Update", class: 'btn btn-success' %>
       </div>

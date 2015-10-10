@@ -33,6 +33,12 @@ class UsersController < ApplicationController
         # and other permissions to Devise.
         #
         # params.require(:user).permit(:name)
-        params.require(:user).permit(:name, :avatar)
+        #
+        # Checkpoint #57 - Another Interlude
+        #
+        # To allow the email_favorites attribute to be saved (see changes in 'app/views/devise/registrations/edit.html.erb'), our users_controller needs a small change as well. Open app/controllers/users_controller.rb and change the definition of the user_params method to permit :email_favorites.
+        #
+        #params.require(:user).permit(:name, :avatar)
+        params.require(:user).permit(:name, :avatar, :email_favorites)
     end
 end
