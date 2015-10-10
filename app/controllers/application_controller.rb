@@ -20,6 +20,15 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: exception.message
   end
   
+  # Checkpoint #57 - Another Interlude
+  #
+  # After a quick search on the Devise GitHub wiki, we found this page. We'll use that as our guide to correctly redirect users after sign-in.
+  #
+  # Open ApplicationController and add the after_sign_in_path_for method to override Devise's default behavior.
+  def after_sign_in_path_for(resource)
+    topics_path
+  end
+  
   # Checkpoint #37 - Authentication Continued
   protected
   

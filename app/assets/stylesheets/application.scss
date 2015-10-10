@@ -49,3 +49,12 @@
 .favorite {
     margin-top: 20px;
 }
+
+/*
+    Checkpoint #57 - Another Interlude
+    
+    Let's make it easy for users to see if they have already voted on a post. Because this is primarily a view change, it's probably not worth extensively testing just yet. Open app/assets/stylesheets/application.scss and add the following class.
+*/
+.voted {
+    opacity: 0.5;
+}

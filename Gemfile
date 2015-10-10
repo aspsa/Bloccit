@@ -95,6 +95,11 @@ group :development, :test do
   # Checkpoint #52 - Intro to RSpec
   # Create a new install-rspec branch. Then add the rspec-rails gem to your Gemfile
   gem 'rspec-rails', '~> 3.0'
+  
+  # Checkpoint #57 - Another Interlude
+  #
+  # Install the capybara gem in your :test group. Capybara is a popular tool for Rails feature specs, and you'll soon see why.
+  gem 'capybara'
 end
 
 # Checkpoint #36 - User Authentication

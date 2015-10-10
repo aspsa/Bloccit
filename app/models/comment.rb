@@ -30,7 +30,24 @@ class Comment < ActiveRecord::Base
   
   def send_favorite_emails
     post.favorites.each do |favorite|
-      FavoriteMailer.new_comment(favorite.user, post, self).deliver_now
+      # Checkpoint #57 - Another Interlude
+      #
+      # Open comment.rb, where the email is sent, and change the send_favorite_emails method to only send the email to users who have elected to follow favorite posts by email (and who didn't write the comment themselves).
+      #
+      #FavoriteMailer.new_comment(favorite.user, post, self).deliver_now
+      #
+      # That if line is pretty long and unclear. Let's refactor it into a private method to make our logic clearer.
+      #
+      #if user_id != favorite.user_id && favorite.user.email_favorites?
+      #  FavoriteMailer.new_comment(favorite.user, self.post, self).deliver_now
+      #end
+      if should_receive_update_for?(favorite)
+        FavoriteMailer.new_comment(favorite.user, post, self).deliver_now
+      end
     end
+  end
+  
+  def should_receive_update_for?(favorite)
+    user_id != favorite.user_id && favorite.user.email_favorites?
   end
 end

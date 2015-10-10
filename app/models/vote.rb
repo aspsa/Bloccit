@@ -19,6 +19,17 @@ class Vote < ActiveRecord::Base
   # The 'after_save' method will run 'update_post' every time a vote is saved. The 'update_post' method calls a method named 'update_rank' on a vote's post object.
   after_save :update_post
   
+  # Checkpoint #57 - Another Interlude
+  #
+  # Note the use of a ternary operator to keep our link_to methods one line long (see 'app/views/votes/_voter.html.erb'). Inside those ternary operators, we are calling up_vote and down_vote methods to determine if the voted class should be used to style the arrow. We did a bit of "wishful coding" here, as we used methods that didn't exist when we called them. Open vote.rb and add the methods.
+  def up_vote?
+    value == 1
+  end
+  
+  def down_vote?
+    value == -1
+  end
+  
   private
   
   def update_post

@@ -57,4 +57,11 @@ class User < ActiveRecord::Base
   def favorited(post)
     favorites.where(post_id: post.id).first
   end
+  
+  # Checkpoint #57 - Another Interlude
+  #
+  # Open user.rb and add a voted method. Like the favorited method, voted should return whether the user has any votes for the post. If yes, it should return the vote; if not, nil.
+  def voted(post)
+    votes.where(post_id: post.id).first
+  end
 end
