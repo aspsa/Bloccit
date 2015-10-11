@@ -47,4 +47,34 @@ module ApplicationHelper
         # we do here. To get around this escaping, we call html_safe.
         (redcarpet.render markdown).html_safe
     end
+
+    # Assignment #57 - Another Interlude
+    #
+    # Recall the state of our _voter.html.erb partial. In it, our links look like this:
+    #
+    # app/views/votes/_voter.html.erb
+    #      <%= link_to " ",
+    #        post_down_vote_path(post),
+    #        class: "glyphicon glyphicon-chevron-down #{(current_user.voted(post)
+    #           && current_user.voted(post).down_vote?) ? 'voted' : '' }",
+    #           method: :post %>
+    #
+    # The ternary operator keeps things to one line, but it also makes this line extremely verbose, confusing, and prone to syntax errors. Move this logic into a helper file.
+    #
+    #   - Define two helper methods in ApplicationHelper: up_vote_link_classes and down_vote_link_classes.
+    #
+    #   - The methods should each return a string with the appropriate classes for an up or down vote link.
+    #
+    #   - Each method should accept a post as an argument.
+    #
+    #   - up_vote_link_classes and down_vote_link_classes should call up_vote? or down_vote? respectively.
+    #
+    #   - Use the new helper methods in the view in place of the long interpolated string.
+    def up_vote_link_clasess(post)
+        (current_user.voted(post) && current_user.voted(post).up_vote?) ? 'voted' : ''
+    end
+    
+    def down_vote_link_classes(post)
+        (current_user.voted(post) && current_user.voted(post).down_vote?) ? 'voted' : ''
+    end
 end
