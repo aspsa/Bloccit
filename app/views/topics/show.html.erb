@@ -15,7 +15,21 @@
 <div class="row">
     <div class="col-md-8">
         <p class="lead"><%= @topic.description %></p>
-        <% @posts.each do |post| %>
+        <!--
+            Checkpoint #58 - Public Profiles
+            
+            Make sure to modify the reference to @topic, changing it to post.topic, so the partial can be included in pages that don't have a @topic variable.
+            
+            Render it from topics#show, using Rails's collection rendering shortcut.
+            
+        % @posts.each do |post| %>
+            <!--
+                Checkpoint #58 - Public Profiles
+
+                Our profile pages would look better with a list of formatted links to posts, rather than displaying post titles. This is identical to what we do on the topics#show page, so rather than repeat that HTML, let's move that code into a partial that can be rendered from both pages.
+
+                In the topics#show view, cut everything within the @posts.each block and paste it into a new app/views/posts/_post.html.erb partial.
+
             <div class="media">
                 <!--
                     Checkpoint #53 - Voting
@@ -23,8 +37,8 @@
                     The 'app/views/topics/show.html.erb' view should render the voter partial as well. Users may appreciate being able to vote on posts without drilling all the way to the actual post view. Open 'app/views/topics/show.html.erb' and add the render call.
                     
                     Because our voter partial is DRY and modular, no other change is needed. Check out this new view in localhost.
-                -->
-               <%= render partial: 'votes/voter', locals: { post: post } %>
+                
+                %= render partial: 'votes/voter', locals: { post: post } %>
                 <div class="media-body">
                     <h4 class="media-heading">
                         <!--
@@ -54,8 +68,8 @@
                             Checkpoint #43 - Post Markdown
                             
                         &lt;%= link_to post.title, [@topic, post] %&gt;
-                        -->
-                        <%= link_to (markdown_to_html post.title), [@topic, post] %>
+                        
+                        %= link_to (markdown_to_html post.title), [@topic, post] %>
                     </h4>
                     
                     <!--
@@ -68,16 +82,19 @@
                     <small>
                         submitted &lt;%= time_ago_in_words(post.created_at) %&gt; ago by &lt;%= post.user.name %&gt;<br />
                     </small>
-                    -->
+                    
                     <small>
-                        <%= image_tag(post.user.avatar.tiny.url) if post.user.avatar? %>
-                        submitted <%= time_ago_in_words(post.created_at) %> ago by
-                        <%= post.user.name %><br />
-                        <%= post.comments.count %> Comments
+                        %= image_tag(post.user.avatar.tiny.url) if post.user.avatar? %>
+                        submitted %= time_ago_in_words(post.created_at) %> ago by
+                        %= post.user.name %><br />
+                        %= post.comments.count %> Comments
                     </small>
                 </div>
             </div>
-        <% end %>
+            
+        % end %>
+        -->
+        <%= render @posts %>
         
         <!--
             Checkpoint #45 - Pagination

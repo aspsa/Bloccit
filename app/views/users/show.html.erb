@@ -1,0 +1,76 @@
+<!--
+    Checkpoint #58 - Public Profiles
+    
+    Solve this error (i.e., missing template error) by adding a blank app/views/users/show.html.erb view (inside a new users directory), and the spec (i.e., 'spec/features/profiles_spec.rb') should pass.
+
+
+    Checkpoint #58 - Public Profiles
+    
+    Let's open back up the user profile page to add more user information and style it better.
+    
+<h1>%= @user.name %></h1>
+-->
+<div class="row">
+    <div class="col-md-8">
+        <div class="media">
+            <% if @user.avatar? %>
+                <div class="media-left">
+                    <%= image_tag @user.avatar.url, class: 'media-object' %>
+                </div>
+            <% end %>
+        </div>
+        <div class="media-body">
+            <h2 class="media-heading"><%= @user.name %></h2>
+            <small>
+                <%= pluralize(@user.posts.count, 'post') %>,
+                <%= pluralize(@user.comments.count, 'comment') %>
+            </small>
+        </div>
+    </div>
+</div>
+
+<!--
+    Checkpoint #58 - Public Profiles
+    
+    This required file (i.e., the '//=require bootstrap' directive in 'app/assets/javascripts/application.js') will perform some JS magic behind the scenes if we add the right selectors to our HTML. Let's do so, implementing Bootstrap's tabbable functionality. Replace the posts and comments section of the user profile with the following HTML.
+
+<h2>Posts</h2>
+<!--
+    Checkpoint #58 - Public Profiles
+    
+    We can add it (i.e., 'app/views/posts/_post.html.erb' partial) to the users#show view as well, in place of our bare-bones scaffolding.
+    
+% @posts.each do |post| %>
+    %= post.title %>
+% end %>
+
+%= render @posts %>
+
+<h2>Comments</h2>
+<!--
+    Checkpoint #58 - Public Profiles
+    
+    Then let's render our preexisting _comment partial in a similar pattern to how we used the _post partial, rather than just looping over the comments in the view.
+
+% @comments.each do |comment| %>
+    %= comment.body %>
+% end %>
+
+%= render @comments %>
+-->
+<div class="row">
+    <div class="tabbable tabs-left">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#posts" data-toggle="tab">Posts</a></li>
+            <li><a href="#comments" data-toggle="tab">Comments</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane active" id="posts">
+            <%= render @posts %>
+        </div>
+        <div class="tab-pane active" id="comments">
+            <%= render @comments %>
+        </div>
+    </div>
+</div>

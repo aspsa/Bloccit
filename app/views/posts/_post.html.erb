@@ -1,0 +1,76 @@
+<!--
+    Checkpoint #58 - Public Profiles
+    
+    Our profile pages would look better with a list of formatted links to posts, rather than displaying post titles. This is identical to what we do on the topics#show page, so rather than repeat that HTML, let's move that code into a partial that can be rendered from both pages.
+
+    In the topics#show view, cut everything within the @posts.each block and paste it into a new app/views/posts/_post.html.erb partial.
+-->
+<div class="media">
+<!--
+    Checkpoint #53 - Voting
+    
+    The 'app/views/topics/show.html.erb' view should render the voter partial as well. Users may appreciate being able to vote on posts without drilling all the way to the actual post view. Open 'app/views/topics/show.html.erb' and add the render call.
+    
+    Because our voter partial is DRY and modular, no other change is needed. Check out this new view in localhost.
+-->
+    <%= render partial: 'votes/voter', locals: { post: post } %>
+    <div class="media-body">
+        <h4 class="media-heading">
+            <!--
+                Checkpoint #40 - Topics and Posts
+                
+                Looking at our 'rake routes' output, how do you
+                think this path helper needs to change? If you
+                guessed '&lt;= link_to post.title,
+                topic_post_path(@topic, post) %&gt;' you're
+                correct. But we'll actually see sometihng more
+                idiomatic and similar to our previous
+                'lt;%= link_to post.title, post %gt;'.
+                &lt;%= link_to post.title, post %&gt;
+            -->
+            <!--
+                Checkpoint #40 - Topics and Posts
+                
+                Remember, even though you didn't explicitly
+                declare 'topic_post_path', Rails extracts it
+                from the '@topic' and 'post' in this example.
+                This is yet another example of Rails
+                conventions. If this "Rails magic" still
+                doesn't make sense, please consult with your
+                mentor.
+            -->
+            <!--
+                Checkpoint #43 - Post Markdown
+                
+            &lt;%= link_to post.title, [@topic, post] %&gt;
+            -->
+            
+            <!--
+                Checkpoint #58 - Public Profiles
+                
+                Make sure to modify the reference to @topic, changing it to post.topic, so the partial can be included in pages that don't have a @topic variable.
+            
+            %= link_to (markdown_to_html post.title), [@topic, post] %>
+            -->
+            <%= link_to (markdown_to_html post.title), [post.topic, post] %>
+        </h4>
+        
+        <!--
+            Checkpoint #44 - Uploading Images
+            
+            Let's make a similar change to topics#show as was done
+            with posts#show, so that each related post is associated
+            with its user's image.
+
+        <small>
+            submitted &lt;%= time_ago_in_words(post.created_at) %&gt; ago by &lt;%= post.user.name %&gt;<br />
+        </small>
+        -->
+        <small>
+            <%= image_tag(post.user.avatar.tiny.url) if post.user.avatar? %>
+            submitted <%= time_ago_in_words(post.created_at) %> ago by
+            <%= post.user.name %><br />
+            <%= post.comments.count %> Comments
+        </small>
+    </div>
+</div>

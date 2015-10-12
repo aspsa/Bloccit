@@ -24,7 +24,12 @@ Rails.application.routes.draw do
   # "Edit personal information" heading. To make it work we also need to modify
   # the routes and make a dedicated UsersController. Open config/routes.rb file
   # and add the following line below the devise_for :users line.
-  resources :users, only: [:update]
+  
+  # Checkpoint #58 - Public Profiles
+  #
+  # You'll only run into this error (the routing error generated afer initially creating 'profiles_spec.rb) if you have resources :users, only: [:update] in your routes file. If you just have resources :users, don't worry if you didn't see the above.
+  #resources :users, only: [:update]
+  resources :users, only: [:show, :update]
   
   # Checkpoint #33 - CRUD
   #

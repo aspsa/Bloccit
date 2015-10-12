@@ -35,6 +35,21 @@ class Post < ActiveRecord::Base
     # Now that we have a rank that's determined by an algorithm, we'll employ it in the default_scope, so that posts are ordered by rank by default. Since we want the largest rank numbers displayed first, we'll use descending (DESC) order. Update the current default_scope declaration with 'rank DESC'
     default_scope { order('rank DESC') }
     
+    # Checkpoint #58 - Public Profiles
+    #
+    # One important piece of functionality escaped our user flow and testing. Even if a user's profile is public, unauthenticated users should not be able to see the posts of that user which are associated with private topics. To take this into account, we should alter the @posts variable in users#show based on the whether the current user is authenticated.
+    #
+    # What's the best way to do this? Hint: We did something similar in topics#show.
+    #
+    # If you guessed that we should use a scope, you were right. Unfortunately, the visible_to scope we wrote for Topic won't be directly usable here. Instead, let's create a visible_to scope on Post that returns all the posts whose topics are visible to the given user.
+    #
+    # We are using a lambda (->) to ensure that a user is present, or, signed in. If the user is present, we return all posts. If not, we use the Active Record joins method to get all posts for which the topic is public.
+    #
+    # This query uses a SQL 'inner join' to query a collection's relations at once. Read through the Rails Guide on Active Record to learn more useful querying methods.
+    #
+    # Don't forget to use this new scope in the UsersController.
+    scope :visible_to, ->(user) { user ? all : joins(:topic).where('topics.public' => true) }
+    
     # Checkpoint #42 - Validating Posts
     #
     # Validate the Post model with the following rules:
