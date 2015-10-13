@@ -32,4 +32,16 @@ class Topic < ActiveRecord::Base
     #
     #scope :visible_to, -> { where(public: true) }
     scope :visible_to, ->(user) { user ? all : where(public: true) }
+    
+    # Checkpoint #58 - Public Profiles
+    #
+    # Dalibor's comment:
+    #   - As I told you before default value for topics.public is not true but  nil. I added before_save method that sets default value to true and it solved problem. I also found error in seeds file and corrected it.
+    before_save :set_public_attribute
+    
+    private
+    
+    def set_public_attribute
+        self.public = (public.nil?) ? true :  public
+    end
 end

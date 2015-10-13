@@ -77,7 +77,14 @@ topics = Topic.all
     # Checkpoint #54 - Mocking with RSpec
     #
     # Anywhere we create a post, we must also call create_vote on it. Some simple text searching for Post.create and post.save returns two relevant results outside of our specs, the posts_controller and our seeds file.
-    @post.create_vote
+    #
+    # Checkpoint #58 - Public Profiles
+    #
+    # Dalibor's comment:
+    #   - As I told you before default value for topics.public is not true but  nil. I added before_save method that sets default value to true and it solved problem. I also found error in seeds file and corrected it.
+    #
+    #@post.create_vote
+    post.create_vote
 
     post.update_rank
 end
