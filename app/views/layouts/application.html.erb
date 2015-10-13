@@ -107,7 +107,7 @@
           
           We're adding a link to the profile page and changing two of our link_to calls to use nested HTML with Bootstrap icons, rather than just link text.
           -->
-          Hello <%= link_to (current_user.name || current_user_email), current_user %>!
+          Hello <%= link_to (current_user.name || current_user.email), current_user %>!
           
           <%= link_to edit_user_registration_path, clas: 'btn btn-primary btn-sm' do %>
             <span class="glyphicon glyphicon-user"></span>
