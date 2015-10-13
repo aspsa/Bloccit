@@ -121,3 +121,8 @@ gem 'fog'
 
 # Checkpoint #45 - Pagination
 gem 'will_paginate', '~> 3.0.5'
+
+# Assignment #59 - Popular Posts
+#
+# Now that New Relic is installed in your production environment, you must configure your app to use it. Open your Gemfile and add the following.
+gem 'newrelic_rpm'
