@@ -58,4 +58,11 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+  
+  # Checkpoint #60 - Testing Users
+  #
+  # Install with bundle. Then add the following line within the RSpec.configure block in your rails_helper, to make Factory Girl's methods directly available in your specs.
+  #
+  # Make Factory Girl's methods available
+  config.include FactoryGirl::Syntax::Methods
 end

@@ -121,3 +121,8 @@ gem 'fog'
 
 # Checkpoint #45 - Pagination
 gem 'will_paginate', '~> 3.0.5'
+
+# Checkpoint #60 - Testing Users
+#
+# Our hand-made factories have served us well, but the Rails community has tools that make object creation in tests easier. One such popular tool is the factory_girl gem.
+gem 'factory_girl_rails', '~> 4.0'
