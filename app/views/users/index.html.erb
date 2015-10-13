@@ -1,0 +1,15 @@
+<!--
+    Checkpoint #59 - Popular Posts
+    
+    Let's make the Active Users view that uses this query (i.e., the SQL query contained within the 'self.top_rated' method of the 'User' model).
+    
+    See the _users partial in the 'app/views/users' directory.2
+-->
+<div class="row">
+    <div class="col-md-8">
+        <h1>Popular Users</h1>
+        <p class="lead">Most active users</p>
+        <%= render partial: 'users/user', collection: @users %>
+        <%= will_paginate @users %>
+    </div>
+</div>

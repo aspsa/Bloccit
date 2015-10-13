@@ -64,4 +64,20 @@ class User < ActiveRecord::Base
   def voted(post)
     votes.where(post_id: post.id).first
   end
+  
+  # Checkpoint #59 - Popular Posts
+  #
+  # We're wishful coding again -- top_rated does not currently exist (see the 'index' action in 'users_controller.rb'). This method should return a collection of users sorted by some sort of activity rank -- calculated from the number of comments and posts. For this method to be efficient, it's going to need some complex SQL.
+  #
+  # We can't recommend the Rails Guide on Active Record highly enough. If you get familiar with Active Record and SQL, you will become a faster developer -- with significantly faster applications.
+  def self.top_rated
+    self.select('users.*')  # Select all attributes of the user
+        .select('COUNT(DISTINCT comments.id) AS comments_count')  # Count the comments made by the user
+        .select('COUNT(DISTINCT posts.id) AS posts_count')        # Count the posts made by the user
+        .select('COUNT(DISTINCT comments.id) + COUNT(DISTINCT posts.id) AS rank')                                                       # Add the comment count to the post count and label the sum as "rank"
+        .joins(:posts)      # Ties the posts table to the users table, via user_id
+        .joins(:comments)    # Ties the comments table to the users table, via user_id
+        .group('users.id')  # Instructs the database to group the results so that each user will be returned in a distinct row
+        .order('rank DESC') # Instructs the database to order the results in descending order, by the rank we created in this query. (rank = comment count + post count)
+  end
 end

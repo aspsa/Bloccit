@@ -51,8 +51,27 @@ class TopicsController < ApplicationController
     # Checkpoint #45 - Pagination
     #
     # @posts = @topic.posts
-    @posts = @topic.posts.paginate(page: params[:page], per_page: 10)
+    #
+    # Checkpoint #59 - Popular Posts
+    #
+    # There's a concept known as eager loading in Rails, and we'll leverage it to reduce the number of queries and improve performance.
+    #
+    # Eager loading is the mechanism for loading the associated records of the objects returned by Model.find using as few queries as possible.
+    #
+    # We'll use the Rails convention for eager loading to improve the performance of topics#show. We will include the user and comments with the initial query executed from the topics_controller, so we don't have to "ask" the database for them separately. Let's start by optimizing the query for the user association. Open topics_controller.rb and make the following change.
+    #
+    # Note that we also moved the @posts definition below the authorization. If the current user isn't authorized to see the posts, it's a waste of time to load them first.
+    #
+    #@posts = @topic.posts.paginate(page: params[:page], per_page: 10)
+    #authorize @topic
     authorize @topic
+    #
+    # Checkpoint #59 - Popular Posts
+    #
+    # Let's optimize again for comments.
+    #
+    #@posts = @topic.posts.includes(:user).paginate(page: params[:page], per_page: 10)
+    @posts = @topic.posts.includes(:user).includes(:comments).paginate(page:params[:page], per_page: 10)
   end
 
   def edit

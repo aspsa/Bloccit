@@ -29,7 +29,13 @@ Rails.application.routes.draw do
   #
   # You'll only run into this error (the routing error generated afer initially creating 'profiles_spec.rb) if you have resources :users, only: [:update] in your routes file. If you just have resources :users, don't worry if you didn't see the above.
   #resources :users, only: [:update]
-  resources :users, only: [:show, :update]
+  #
+  # Checkpoint #59 - Popular Posts
+  #
+  # While we're thinking about popular posts, let's build a way to display the top Bloccit users.
+  #
+  #resources :users, only: [:show, :update]
+  resources :users, only: [:show, :update, :index]
   
   # Checkpoint #33 - CRUD
   #
@@ -110,10 +116,25 @@ Rails.application.routes.draw do
     # Note the 'only: []'' in the top-level post resources line. This is because we don't want to create any '/posts/:id' routes, just 'posts/:post_id/comments'.
   # end
     resources :topics do
-      resources :posts, except: [:index]
+      # Checkpoint #59 - Popular Posts
+      #
+      # Let's move our post views and controllers so they're nested under topics. Make the following directory changes:
+      #   - app/controllers/posts_controller.rb -> app/controllers/topics/posts_controller.rb
+      #   - app/views/posts/_form.html.erb -> app/views/topics/posts/_form.html.erb
+      #   - app/views/posts/edit.html.erb -> app/views/topics/posts/edit.html.erb
+      #   - app/views/posts/new.html.erb -> app/views/topics/posts/new.html.erb
+      #   - app/views/posts/show.html.erb -> app/views/topics/posts/show.html.erb
+      #
+      #resources :posts, except: [:index]
+      resources :posts, except: [:index], controller: 'topics/posts'
     end
     
-    resources :posts, only: [] do
+    # Checkpoint #59 - Popular Posts
+    #
+    # The '/app/controllers/posts_controller.rb' 'index' action and the 'app/views/posts/index.html.erb' view combination does not have a route -- let's add it. Because we already have a top-level :posts resource -- without any actions -- we can just add :index to that resource declaration.
+    #
+    #resources :posts, only: [] do
+    resources :posts, only: [:index] do
       resources :comments, only: [:create, :destroy]
 
       # Checkpoint #55 - Favoriting

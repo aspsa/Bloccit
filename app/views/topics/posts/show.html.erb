@@ -1,0 +1,171 @@
+    <!--
+    When you refresh the page, you should see something like this:
+    
+    {"action"=>"show", "controller"=>"posts", "id"=>"1"}
+    
+    ...this hash contains information on which controller we're in, and which
+    action. It also has the 'id' of the post on which we clicked (and which is
+    encoded in the URL).
+-->
+
+<!-- &lt;%= params %&gt; -->
+<!--
+    Checkpoint #33 - CRUD
+    Replace previous code with post-specific code.
+-->
+<!--
+    Checkpoint #43 - Post Markdown
+    
+<h1>&lt;%= @post.title %&gt;</h1>
+-->
+<!-- <h1>%= markdown_to_html @post.title %></h1> -->
+
+<!-- Checkpoint #35 - More CRUD, the 'link_to statement -->
+<!-- Checkpoint #39 - Authorization, the surrouding 'if' -->
+<!--
+    Checkpoint #40 - Topics and Posts
+    
+    Add (Twitter) Bootstrap CSS.
+    Modified the 'link_to' statement.
+&lt;% if policy(@post).edit? %&gt;
+    &lt;%= link_to "Edit", edit_post_path(@post), class: 'btn btn-success' %&gt;
+&lt;% end %&gt;
+<p>&lt;%= @post.body %&gt;</p>
+-->
+
+<!--
+    Checkpoint #46 - Comments
+    
+    View changes:
+        - Create a '_comment.html.erb' partial in the comments directory. Use it
+          in the 'posts#show' view to show the body of each comment already
+          associated with the post. Whereas our above form partial should render
+          the form for submitting a new comment, this comment partial should
+          render the relevant information for a single preexisting comment
+          associated with our '@post'. Because this partial renders a single
+          comment, we need to call it multiple times, rendering a partial for
+          each comment in @comments. This is a good candidate for an each loop.
+-->
+<div class="row">
+    <div class="col-md-8">
+        <!--
+            We have our voter partial, so let's think about where we should call render. Users should be able to vote on each post, so we need to render our voter partial wherever we show posts. There are two places we do that - 'views/posts/show.html.erb' and 'app/views/topics/show.html.erb'. Open 'app/views/posts/show.html.erb' and add the call to render.
+            
+            Because the partial has access to the '@post' variable, we don't technically need to pass it here. Other views where we would like to incorporate this partial might not have an identical '@post' variable, however, so it's a much better idea to pass 'post' in explicitly, rather than implicitly expect a '@post'. This is why we made the partial we created reference 'post', not '@post'.
+        --->
+        <%= render partial: 'votes/voter', locals: { post: @post } %>
+        
+        <!---
+            Checkpoint #53 - Voting
+            
+            Go back to 'app/views/posts/show.html.erb' and move the '<h1>' containing 'post.title' directly under the call to render our voter partial.
+        --->
+        <h1><%= markdown_to_html @post.title %></h1>
+        
+        <!--
+            Checkpoint #44 - Uploading Images
+            
+            Open posts#show and add a user image to a post.
+        -->
+
+        <small>
+            <%= image_tag(@post.user.avatar.tiny.url) if @post.user.avatar? %>
+            submitted <%= time_ago_in_words(@post.created_at) %> ago by
+            <%= @post.user.name %>
+        </small>
+
+        <!--
+            Checkpoint #43 - Post Markdown
+
+        <p>%= @post.body %></p>
+        -->    
+
+        <p><%= markdown_to_html @post.body %></p>
+    </div>
+    <div class="col-md-4">
+        <% if policy(@post).edit? %>
+            <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
+        <% end %>
+    
+        <!--
+            Checkpoint #51 - Destroy
+            
+            Modify 'posts#show' to add a 'link_t' for deletion.
+            
+            Notice that we must supply an array of instance variables ([@topic, @post]) to the 'link_to' method because posts are nested under topics.
+        -->
+        <% if policy(@post).destroy? %>
+            <%= link_to "Delete Post", [@topic, @post], method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure you want to delete this post?" } %>
+        <% end %>
+        
+        <!--
+            Checkpoint #53 - Voting
+            
+            If you refresh the page, you'll notice that posts#show is looking better. But it would be nice to display the score of the post more prominently. Remember that you added a few methods to 'post.rb'. Let's use them to make the show view even nicer. In 'app/views/posts/show.html.erb', add the following.
+        -->
+        <div>
+            <h3><%= pluralize(@post.points, 'point') %></h3>
+            <small>
+                <%= pluralize(@post.up_votes, 'up vote') %>
+                <%= pluralize(@post.down_votes, 'down vote') %>
+            </small>
+        </div>
+        
+        <!--
+            Checkpoint #55 - Favorited
+            
+            Let's render the '_favorite.html.erb' partial in the posts#show view.
+        -->
+        <%= render partial: 'favorites/favorite', locals: { post: @post } %>
+    </div>
+</div>
+
+<h3>Comments:</h3>
+
+<!--
+    Assignment #46 - Comments
+    
+    If you try to create a comment without first signing in, you'll encounter a
+    no method 'id' for NilClass error. This error is thrown because current_user
+    is nil when you're not signed in, and comment creation attempts to extract
+    an id from this nil object.
+        - Use CommentPolicy in posts#show to hide the comment form unless a user
+          is signed in.
+
+    Dalibor's comment:
+        - Use &lt;% if policy(@comment).new? %>
+
+% if @post.user.present? %>
+    %= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
+% end %>
+-->
+
+    <!--
+        Dalibor's comment:
+        
+        Use the policy, not the:
+
+        % if @post.user.present? %>
+            %= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
+        % end %>
+    -->
+    <!--
+        Dalibor's comment:
+            - Use &lt;% if policy(@comment).new? %> instead of &lt;% @post.user.present? %>
+    -->
+<% if policy(@comment).new? %>
+    <%= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
+<% end %>
+
+<!--
+    Checkpoint #59 - Popular Posts
+    
+    There's also a subtle change we'll need to make in app/views/topics/posts/show.html.erb.
+    
+    This change is due to Rails organizational conventions. When Rails sees render @comments, it looks for a _comment partial in the parent directory of the view where it's called. But now the parent directory of the current view is topics, which does not contain that partial -- so we must specify the path to the partial to render for each item in the collection.
+    
+    %= render @comments %>
+    
+    Note: The next line, which is consistent with the Checkpoint #59 - Popular Posts instructions, already existed from a past checkpoint.
+--->
+<%= render partial: 'comments/comment', collection: @comments %>

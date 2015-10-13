@@ -29,6 +29,21 @@
         -->
         <li><%= link_to "Bloccit", root_path %></li>
         <li><%= link_to "About", about_path %></li>
+        
+        <!--
+          Checkpoint #59 - Popular Posts
+          
+          The page (i.e., popular posts page) is not linked to anywhere on our application. Let's create a link to our popular posts in the header. While we're there, let's link to the topics index as well. Open app/views/layouts/application.html.erb and add.
+        -->
+        <li><%= link_to "Topics", topics_path %></li>
+        <li><%= link_to "Popular", posts_path %></li>
+        
+        <!--
+          Checkpoint #59 - Popular Posts
+          
+          Finally, let's add a link to the header so users can visit this new view. (after creating the user 'index' and partial views)
+        -->
+        <li><%= link_to "Users", users_path %></li>
       </ul>
       
       <!-- Checkpoint #35 - More CRUD -->

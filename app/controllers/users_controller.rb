@@ -10,6 +10,15 @@ class UsersController < ApplicationController
     #
     #before_action :authenticate_user!
     before_action :authenticate_user!, except: [:show]
+    
+    # Checkpoint #59 - Popular Posts
+    #
+    # While we're thinking about popular posts, let's build a way to display the top Bloccit users. (See changes to 'routes.rb')
+    #
+    # Then add the index method in to users_controller.
+    def index
+        @users = User.top_rated.paginate(page: params[:page], per_page: 10)
+    end
 
     # Checkpoint #58 - Public Profiles
     #

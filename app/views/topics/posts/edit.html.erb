@@ -1,0 +1,71 @@
+<!-- Checkpoint #35 - More CRUD
+<h1>Posts#edit</h1>
+<p>Find me in app/views/posts/edit.html.erb</p> -->
+
+<h1>Edit Post</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <p>Guidelines for posts</p>
+        <ul>
+            <li>Stay on topic.</li>
+            <li>Keep it concise.</li>
+            <li>Do not cross-post.</li>
+        </ul>
+    </div>
+    <div class="col-md-8">
+        <!--
+            Checkpoint #42 - Validating Posts
+            
+            Now that you have some new errors that can be raised by the
+            validates methods (see 'post.rb'), change the 'Post' views
+            to display these errors when they occur. Since these changes
+            affect both the 'new' and 'edit' views, this is a good time
+            to demonstrate using partials to make our views DRY.
+            
+            Partials are fragments of template code, which are used in
+            views. Partials are called with the 'render' method. Rendering
+            a partial is essentially copying and pasting view code from
+            another file.
+            
+            You've called a partial in 'posts#edit', but currently, this
+            partial file doesn't exist. To get this partial render working,
+            we need to create the specified 'form' file, and fill it with
+            the contents we just cut out.
+            
+            Note: This checkpoint requires commenting out the code
+            added in Checkpoint #40.
+        -->
+        <!--
+            Checkpoint #40 - Topics and Posts
+            &lt;%= form_for @post do |f| %&gt;
+        -->
+        <!--&lt;%= form_for [@topic, @post] do |f| &gt;%
+            <div class="form-group">
+                &lt;%= f.label :title &gt;%
+                &lt;%= f.text_field :title, class: 'form-control', placeholder: "Enter post title" &gt;%
+            </div>
+            <div class="form-group">
+                &lt;%= f.label :body &gt;%
+                &lt;%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" &gt;%
+            </div>
+            <div class="form-group">
+                &lt;%= f.submit "Save", class: 'btn btn-success' &gt;%
+            </div>
+        &lt;% end &gt;%-->
+
+        <div class="row">
+            <div class="col-md-4">
+                <p>Guidelines for <posts></posts></p>
+                <ul>
+                    <li>Make sure it rhymes.</li>
+                    <li>Don't use the letter "A".</li>
+                    <li>The incessant use of hashtags will get you banned.</li>
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <%= render partial: 'form', locals: { topic: @topic, post: @post } %>
+            </div>
+        </div>
+    </div>
+</div>
