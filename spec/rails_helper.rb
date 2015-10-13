@@ -29,6 +29,13 @@ require 'rspec/rails'
 # This line automatically requires all .rb files in the spec/support directory before running any specs. (Rails.root returns the path to your app's directory in the filesystem.) This means that if we put any Ruby files in that directory, they'll automatically be required in our tests.
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
+# Assignment #58 - Public Profiles
+#
+# Do not use Devise::TestHelpers to sign in your user. They don't work in feature specs. Instead, read How To: Test with Capybara and follow the instructions to include the test helpers from Warden, the authentication framework on which Devise is built.
+include Warden::Test::Helpers
+Warden.test_mode!
+
+
 # Read about Dir and File.join to get a better sense of how this works.
 
 # Checks for pending migrations before tests are run.
