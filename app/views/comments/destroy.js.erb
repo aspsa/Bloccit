@@ -10,8 +10,16 @@
 $('#comment-' +%= @comment.id %>).hide();
 -->
 <% if @comment.destroyed? %>
+    <!--
+        Assignment #61 - Destroying with Ajax
+        
+        Rather than abruptly hiding comments when they're deleted, fade-out comments instead:
+
+            - To fade-out deleted comments, use jQuery's fadeOut() method.
+            - Experiment with different time out durations.
     $('#comment-' +<%= @comment.id %>).hide();
-    
+    -->
+    $('#comment-' +<%= @comment.id %>).fadeOut(500, "swing")
     <!--
         Checkpoint #61 - Destroying with Ajax
         
