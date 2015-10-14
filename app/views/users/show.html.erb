@@ -23,7 +23,15 @@
             <h2 class="media-heading"><%= @user.name %></h2>
             <small>
                 <%= pluralize(@user.posts.count, 'post') %>,
-                <%= pluralize(@user.comments.count, 'comment') %>
+                
+                <!--
+                    Checkpoint #61 - Destroying with Ajax
+                    
+                    The DOM element that isn't updated via Ajax is the comment count on the users#show page. Let's add a class on the proper header element so that we can find and update it with Ajax. Open users#show and add a div with the js-comments-count class.
+                    
+                %= pluralize(@user.comments.count, 'comment') %>
+                -->
+                <div class='js-comments-count'><%= pluralize(@user.comments.count), 'comment') %></div>
             </small>
         </div>
     </div>

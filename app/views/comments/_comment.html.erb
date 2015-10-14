@@ -63,8 +63,14 @@
                         - &lt;%= link_to "Delete", [comment.post, comment], method: :delete %>
                         
                 | %= link_to "Delete", [@post, comment], method: :delete %>
+                
+                    Checkpoint #61 - Destroying with Ajazx
+                
+                    We also need to enable the delete link in the view to use Ajax. Rails makes this simple as well, just pass a remote: true option to the link_to method. Open the comment partial, and modify the link_to.
+                
+                %= link_to "Delete", [comment.post, comment], method: :delete %>
                 -->
-                <%= link_to "Delete", [comment.post, comment], method: :delete %>
+                <%= link_to "Delete", [comment.post, comment], method: :delete, remote: true %>
             <% end %>
         </small>
         <p><%= comment.body %></p>

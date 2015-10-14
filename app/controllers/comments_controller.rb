@@ -105,10 +105,30 @@ class CommentsController < ApplicationController
       #   - redirect_to [@post.topic, @post]
       #
       # redirect_to [@post, @comment]
-      redirect_to [@post.topic, @post]
+      #
+      # Checkpoint #60 - Destroying with Ajax
+      #
+      # Update the destroy action in the comments controller. Comment out the redirect_to statement.
+      #
+      #redirect_to [@post.topic, @post]
     else
       flash[:error] = "Comment couldn't be deleted. Try again."
-      redirect_to [@topic, @post]
+      
+      # Checkpoint #60 - Destroying with Ajax
+      #
+      # Update the destroy action in the comments controller. Comment out the redirect_to statement.
+      #
+      #redirect_to [@topic, @post]
+    end
+    
+    # Checkpoint #60 - Destroying with Ajax
+    #
+    # Update the destroy action in the comments controller.
+    #
+    # The respond_to block gives our controller action the ability to return different response types, depending on what was asked for in the original request. The controller's response is unchanged if the client requests HTML, but if the client requests JavaScript, the controller will render .js.erb instead.  
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
     
