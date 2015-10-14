@@ -167,5 +167,15 @@
     %= render @comments %>
     
     Note: The next line, which is consistent with the Checkpoint #59 - Popular Posts instructions, already existed from a past checkpoint.
---->
-<%= render partial: 'comments/comment', collection: @comments %>
+
+    Checkpoint #61 - Creating with Ajax
+    
+    To add a comment to the top of a list, we'll use the jQuery prepend method. To call prepend, we'll need something to prepend the comment to. Open posts#show and add a div around the comments collection and also around the new comment form.
+%= render partial: 'comments/comment', collection: @comments %>
+-->
+<div class='js-comments'>
+        <%= render partial: 'comments/comment', collection: @comments %>
+</div>
+<div class='new-comment'>
+    <%= render 'comments/form' %>
+</div>

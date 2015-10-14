@@ -8,6 +8,11 @@ class Comment < ActiveRecord::Base
   #     model so you can call 'comment.user'.
   belongs_to :user
   
+  # Checkpoint #61 - Creating with Ajax
+  #
+  # Since we are prepending comments to the top of the list (see 'app/views/comments/create.js.erg'), we should make sure that comments are always ordered consistently. For example, if we refresh the page after the Ajax response, we want the order to stay consistent. We can accomplish this by using a default_scope.
+  default_scope { order('updated_at DESC') }
+  
   # Checkpoint #55 - Favoriting
   #
   # When you want to do something every time something happens, it's a good candidate for a model callback. Since we want to send an email every time a comment is added to a favorited post, let's add a callback to comment.rb.
