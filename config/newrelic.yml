@@ -1,28 +1,23 @@
-# Assignment #59 - Popular Posts
-#
-# Create an account at New Relic and sign up for a free Lite account.
-#
-# You will receive the welcome e-mail with a license key and a newrelic.yml file. Copy newrelic.yml into app/config.
-
 #
 # This file configures the New Relic Agent.  New Relic monitors Ruby, Java,
 # .NET, PHP, Python and Node applications with deep visibility and low
 # overhead.  For more information, visit www.newrelic.com.
 #
-# Generated October 13, 2015
+# Generated October 14, 2015
 # 
-# This configuration file is custom generated for Independent Consultant_36
+# This configuration file is custom generated for app39303589@heroku.com
 #
 # For full documentation of agent configuration options, please refer to
 # https://docs.newrelic.com/docs/agents/ruby-agent/installation-configuration/ruby-agent-configuration
 
 common: &default_settings
   # Required license key associated with your New Relic account.
-  license_key: b597fcc45934b0d4742e94bb48f6ea217a7dbd42
+  license_key: b8f902a84df59b6bf5c70345dfe58cf4e7bb0420
 
   # Your application name. Renaming here affects where data displays in New
   # Relic.  For more details, see https://docs.newrelic.com/docs/apm/new-relic-apm/maintenance/renaming-applications
-  app_name: My Application
+  #app_name: My Application
+  app_name: aspsa-bloccit
 
   # To disable the agent regardless of other settings, uncomment the following:
   # agent_enabled: false
@@ -36,7 +31,8 @@ common: &default_settings
 # If your application has other named environments, configure them here.
 development:
   <<: *default_settings
-  app_name: My Application (Development)
+  #app_name: My Application (Development)
+  app_name: aspsa-bloccit
 
   # NOTE: There is substantial overhead when running in developer mode.
   # Do not use for production or load testing.
@@ -49,7 +45,8 @@ test:
 
 staging:
   <<: *default_settings
-  app_name: My Application (Staging)
+  #app_name: My Application (Staging)
+  app_name: aspsa-bloccit
 
 production:
   <<: *default_settings
