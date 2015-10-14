@@ -47,4 +47,18 @@ describe User do
             expect( users.first.comments_count ).to eq(2)
         end
     end
+    
+    # Assignment #60 - Testing Users
+    #
+    #   - Read the Factory Girl getting started guide.
+    #
+    #   - Make a user_with_post_and_comment factory in the spec/factories/user.rb file.
+    #
+    #   - Define the factory within the factory :user definition, so you don't have to repeat most of the attribute definitions.
+    #       -- Because of the direction of associations, comments and posts have
+    #          user IDs, not the other way around. Therefore, use an after
+    #          (:build).
+    #
+    #   - Use the user_with_post_and_comment factory in your users specs.
+ 
 end
