@@ -14,7 +14,7 @@ describe "Visiting profiles" do
         # Dalibor's comment:
         #   - Hint: it bloc and expectations are the same as in not signed in case. You just need to log in user in before bloc. Check Capybara documentation how to do that.
         login_as(@user, :scope => :user)
-        
+
         # Checkpoint #58 - Public Profiles
         #
         # Our user flow states that the visitor should see the user's "information, posts, and comments." Let's add these expectations to the spec.
@@ -62,6 +62,7 @@ describe "Visiting profiles" do
     # Once you've successfully signed in the user, run profiles_spec.rb to confirm your new test passes.
     describe "signed in" do
         it "shows profile" do
+            visit user_path(@user)
             expect(current_path).to eq(user_path(@user))
             
             expect( page ).to have_content(@user.name)
