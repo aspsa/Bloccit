@@ -44,6 +44,6 @@ FactoryGirl.define do
         password_confirmation "123"
         confirmed_at Time.now
         
-        after(:build) { "Add post and comment" }
+        after(:build) { |user, user_with_post_and_comment| user.top_rated }
     end
 end
