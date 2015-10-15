@@ -8,10 +8,20 @@ class Comment < ActiveRecord::Base
   #     model so you can call 'comment.user'.
   belongs_to :user
   
-  # Checkpoint #61 - Creating with Ajax
+  # Checkpoint #62 - Creating with Ajax
   #
   # Since we are prepending comments to the top of the list (see 'app/views/comments/create.js.erg'), we should make sure that comments are always ordered consistently. For example, if we refresh the page after the Ajax response, we want the order to stay consistent. We can accomplish this by using a default_scope.
-  default_scope { order('updated_at DESC') }
+  #
+  # Assignment #62 - Creating with Ajax
+  #
+  #   - Rather than attach new comments to the top of the list, attach them to the bottom. This will make Bloccit adhere to the conventions followed by most commenting systems.
+  #
+  #   - To attach new comments to the bottom of the list, use the jQuery append() method.
+  #
+  #   - Since we are now appending comments to the bottom of the list, reverse the default_scope in comment.rb so that comments are now returned in ascending order by their updated date.
+  #
+  #default_scope { order('updated_at DESC') }
+  default_scope { order('updated_at ASC') }
   
   # Checkpoint #55 - Favoriting
   #
