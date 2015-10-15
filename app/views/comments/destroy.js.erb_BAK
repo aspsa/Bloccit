@@ -1,4 +1,4 @@
-/*
+<!--
     Checkpoint #61 - Destroying with Ajax
     
     Now that we've instructed the controller to respond via Ajax, we need to provide a view for the Ajax response. Rails has a special convention for views such as these; they should be Javascript Embedded Ruby files, or .js.erb. These views allow us to mix JavaScript and Ruby code in one file, which is very convenient for responding to Ajax requests. The Rails convention is to name the .js.erb view corresponding to the controller action, so in this case app/views/comments/destroy.js.erb. This file will have access to the instance variables just like a regular view would. Create the file and add the following code.
@@ -8,15 +8,15 @@
     If the delete fails, we should display an error message. Open destroy.js.erb and add the following to handle a failed request
     
 $('#comment-' +%= @comment.id %>).hide();
-*/
+-->
 <% if @comment.destroyed? %>
     $('#comment-' +<%= @comment.id %>).hide();
     
-    /*
+    <!--
         Checkpoint #61 - Destroying with Ajax
         
         Now we can update the destroy.js.erb again. (after having revised app/views/users/show.html.erb)
-    */
+    -->
     $('.js-comments-count').html("<%= pluralize(@comment.user.comments.count, 'comment') %>");
 <% else %>
     $('#comment-' +<%= @comment.id %>).prepend("<div class='alert alert-danger'><%= flash[:error] %></div>");
