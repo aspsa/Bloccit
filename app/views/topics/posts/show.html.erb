@@ -153,9 +153,11 @@
         Dalibor's comment:
             - Use &lt;% if policy(@comment).new? %> instead of &lt;% @post.user.present? %>
     -->
-<% if policy(@comment).new? %>
-    <%= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
-<% end %>
+<!--
+% if policy(@comment).new? %>
+    %= render partial: 'comments/form', locals: {topic: @topic, post: @post, comment: @comment} %>
+% end %>
+-->
 
 <!--
     Checkpoint #59 - Popular Posts
@@ -174,7 +176,7 @@
 %= render partial: 'comments/comment', collection: @comments %>
 -->
 <div class='js-comments'>
-        <%= render partial: 'comments/comment', collection: @comments %>
+    <%= render partial: 'comments/comment', collection: @comments %>
 </div>
 <div class='new-comment'>
     <%= render 'comments/form' %>

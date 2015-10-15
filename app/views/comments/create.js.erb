@@ -1,4 +1,4 @@
-<!--
+/*
     Checkpoint #61 - Creating with Ajax
     
     Create app/views/comments/create.js.erb, and consider the following pseudo code for your view:
@@ -16,15 +16,15 @@
     Refer to the Rails docs for more details on escape_javascript.
     
     Using our pseudo-code as a guide, use the valid? method, along with escape_javascript to create a new comment unobtrusively.
--->
+*/
 <% if @comment.valid? %>
     $('.js-comments').prepend("<%= escape_javascript(render(@comment)) %>");
     
-    <!--
+    /*
         Checkpoint #61 - Creating with Ajax
         
         We'll use the new @new_comment variable in create.js.erb.
-    -->
+    */
     $('.new-comment').html("<%= escape_javascript(render partial: 'comments/form', locals: { post: @post, comment: @new_comment }) %>");
 <% else %>
     $('.new-comment').html("<%= escape_javascript(render partial: 'comments/form', locals: { post: @post, comment: @comment }) %>");
