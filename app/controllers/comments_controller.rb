@@ -7,6 +7,7 @@
 #     with a post and the 'current_user' who created it.
 class CommentsController < ApplicationController
   def create
+=begin
     # Checkpoint #46 - Comments
     #
     # Fill in the 'create' action. It should create a new comment associated
@@ -60,6 +61,35 @@ class CommentsController < ApplicationController
     else
       flash[:error] = "There was an error saving the comment. Please try again."
       render :new
+    end
+=end
+
+    # Checkpoint #61 - Creating with Ajax
+    #
+    # We let you write your own create action in the Comments checkpoint. It may differ from ours, so rather than showing a diff, we'll just give you new code. Replace your code with the below.
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
+    
+    @comment = Comment.new( comment_params )
+    @comment.user = current_user
+    @comment.post = @post
+    
+    # Checkpoint #61 - Creating with Ajax
+    #
+    # Create a new comment in your app. The unobtrusive create action should have worked, but you probably noticed a problem -- the form wasn't cleared after the create. To clear the form, we can render a new _form partial, with a new instance of a comment. We'll start by adding this new instance variable to the comments controller.
+    @new_comment = Comment.new
+    
+    authorize @comment
+    
+    if @comment.save
+      flash[:notice] = "Comment was created."
+    else
+      flash[:error] = "There was an error saving the comment. Please try again."
+    end
+    
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
   

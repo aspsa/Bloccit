@@ -25,9 +25,16 @@
     Changge the comment paths, in both the 'comments/_comment.html.erb' and the 'comments/_form.html.erb' partials.
 
 %= form_for [topic, post, comment] do |f| %>
+
+    Checkpoint #61 - Creating with Ajax
+    
+    Open the comment form partial and add remote: true to enable Ajax on the form.
+    
+%= form_for [post, comment] do |f| %>
 -->
-<%= form_for [post, comment] do |f| %>
-    <% if comment.errors.any? %>
+<!-- %= form_for [@post, Comment.new], remote: true do |f| %> -->
+<%= form_for [@post, Comment.new], remote: true do |f| %>
+    <% if @comment.errors.any? %>
         <div class="alert alert-danger">
             <h4>There are <%= pluralize(comment.errors.count, "error") %>.</h4>
             <ul>
@@ -37,7 +44,7 @@
             </ul>
         </div>
     <% end %>
-    <%= form_group_tag(post.errors[:body]) do %>
+    <%= form_group_tag(@post.errors[:body]) do %>
         <%= f.label :body %>
         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter comment" %>
     <% end %>
