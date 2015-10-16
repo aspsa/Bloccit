@@ -23,57 +23,57 @@ FactoryGirl.define do
         password "helloworld"
         password_confirmation "helloworld"
         confirmed_at Time.now
-    end
-    
-    # Assignment #60 - Testing Users
-    #
-    #   - Read the Factory Girl getting started guide.
-    #
-    #   - Make a user_with_post_and_comment factory in the spec/factories/user.rb file.
-    #
-    #   - Define the factory within the factory :user definition, so you don't have to repeat most of the attribute definitions.
-    #       -- Because of the direction of associations, comments and posts have
-    #          user IDs, not the other way around. Therefore, use an after
-    #          (:build).
-    #
-    #   - Use the user_with_post_and_comment factory in your users specs.
-    #
-    # Dalibor's comments:
-    # 
-    # I'll help you start with the first task (I suppose you read FG documentation). Try to finish others on your own.
-    #
-    # spec/factories/user.rb
-    #
-    # FactoryGirl.define do
-    #   factory :user do
-    #       name "Douglas Adams"
-    #       sequence(:email, 100) { |n| "person#{n}@example.com" }
-    #       password "helloworld"
-    #       password_confirmation "helloworld"
-    #       confirmed_at Time.now
-    #
-    #       factory :user_with_post_and_comment do
-    #           after(:build) do |user|
-    #               post = create(:post, user: user)
-    #               comment = create(:comment,  user: user, post: post)    
-    #           end
-    #       end
-    #   end
-    # end
-    #
-    # factory :user_with_post_and_comment, class: User do
-    #    name "John Q. Public"
-    #    sequence(:email, 50) { |n| "factory_person#{n}@example.com" }
-    #    password "123"
-    #    password_confirmation "123"
-    #    confirmed_at Time.now
-    #    
-    #    after(:build) { |user, user_with_post_and_comment| user.top_rated }
-    # end
-    factory :user_with_post_and_comment do
-        after(:build) do |user|
-            post = create(:post, user: user)
-            comment = create(:comment, user: user, post: post)
+
+        # Assignment #60 - Testing Users
+        #
+        #   - Read the Factory Girl getting started guide.
+        #
+        #   - Make a user_with_post_and_comment factory in the spec/factories/user.rb file.
+        #
+        #   - Define the factory within the factory :user definition, so you don't have to repeat most of the attribute definitions.
+        #       -- Because of the direction of associations, comments and posts have
+        #          user IDs, not the other way around. Therefore, use an after
+        #          (:build).
+        #
+        #   - Use the user_with_post_and_comment factory in your users specs.
+        #
+        # Dalibor's comments:
+        # 
+        # I'll help you start with the first task (I suppose you read FG documentation). Try to finish others on your own.
+        #
+        # spec/factories/user.rb
+        #
+        # FactoryGirl.define do
+        #   factory :user do
+        #       name "Douglas Adams"
+        #       sequence(:email, 100) { |n| "person#{n}@example.com" }
+        #       password "helloworld"
+        #       password_confirmation "helloworld"
+        #       confirmed_at Time.now
+        #
+        #       factory :user_with_post_and_comment do
+        #           after(:build) do |user|
+        #               post = create(:post, user: user)
+        #               comment = create(:comment,  user: user, post: post)    
+        #           end
+        #       end
+        #   end
+        # end
+        #
+        # factory :user_with_post_and_comment, class: User do
+        #    name "John Q. Public"
+        #    sequence(:email, 50) { |n| "factory_person#{n}@example.com" }
+        #    password "123"
+        #    password_confirmation "123"
+        #    confirmed_at Time.now
+        #    
+        #    after(:build) { |user, user_with_post_and_comment| user.top_rated }
+        # end
+        factory :user_with_post_and_comment do
+            after(:build) do |user|
+                post = create(:post, user: user)
+                comment = create(:comment, user: user, post: post)
+            end
         end
     end
 end

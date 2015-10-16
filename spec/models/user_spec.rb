@@ -62,13 +62,19 @@ describe User do
     #   - Use the user_with_post_and_comment factory in your users specs.
     define ".user_with_post_and_comment" do
         before do
-            @user1 = create(:user)
+            # Assignment #60 - Testing Users
+            #
+            # Dalibor's comments:
+            #   - You need to use this new factory (spec that you defined is not using it). Just use create(:user_with_post_and_comment) instead of create(:user) in any spec.
+            #
+            #@user1 = create(:user)
+            @user1 = create(:user_with_post_and_comment)
             post = create(:post, user: @user1)
             create(:comment, user: @user1, post: post)
         end
         
         xit "return a user's post and comment" do
-            expect ( @user1.post.comment ).to eq(1)
+            expect( @user1.post.comment ).to eq(1)
         end
     end
 end
