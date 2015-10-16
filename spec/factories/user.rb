@@ -37,13 +37,43 @@ FactoryGirl.define do
     #          (:build).
     #
     #   - Use the user_with_post_and_comment factory in your users specs.
-    factory :user_with_post_and_comment, class: User do
-        name "John Q. Public"
-        sequence(:email, 50) { |n| "factory_person#{n}@example.com" }
-        password "123"
-        password_confirmation "123"
-        confirmed_at Time.now
-        
-        after(:build) { |user, user_with_post_and_comment| user.top_rated }
+    #
+    # Dalibor's comments:
+    # 
+    # I'll help you start with the first task (I suppose you read FG documentation). Try to finish others on your own.
+    #
+    # spec/factories/user.rb
+    #
+    # FactoryGirl.define do
+    #   factory :user do
+    #       name "Douglas Adams"
+    #       sequence(:email, 100) { |n| "person#{n}@example.com" }
+    #       password "helloworld"
+    #       password_confirmation "helloworld"
+    #       confirmed_at Time.now
+    #
+    #       factory :user_with_post_and_comment do
+    #           after(:build) do |user|
+    #               post = create(:post, user: user)
+    #               comment = create(:comment,  user: user, post: post)    
+    #           end
+    #       end
+    #   end
+    # end
+    #
+    # factory :user_with_post_and_comment, class: User do
+    #    name "John Q. Public"
+    #    sequence(:email, 50) { |n| "factory_person#{n}@example.com" }
+    #    password "123"
+    #    password_confirmation "123"
+    #    confirmed_at Time.now
+    #    
+    #    after(:build) { |user, user_with_post_and_comment| user.top_rated }
+    # end
+    factory :user_with_post_and_comment do
+        after(:build) do |user|
+            post = create(:post, user: user)
+            comment = create(:comment, user: user, post: post)
+        end
     end
 end
